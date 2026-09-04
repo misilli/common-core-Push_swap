@@ -70,21 +70,31 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
-
-int ft_lstswap(t_list **lst)
+void ft_lstswap(t_list **lst)
 {
-	t_list **temp;
+    t_list *first;
+    t_list *second;
 
-	*temp = *lst;
-
-	(**lst).next = (*(** lst).next).next;
-	*lst = (** lst).next;
-	(**lst).next = *temp;
-
-	printf("%d", (**lst).content);
-
-
+    if (!lst || !*lst || !(*lst)->next)
+        return ;
+    first = *lst;
+    second = first->next;
+    first->next = second->next;
+    second->next = first;
+    *lst = second;
 }
+
+/*void ft_lstswap(t_list **lst)
+{
+    t_list *tmp;
+
+    if (!lst || !*lst || !(*lst)->next)
+        return ;
+    tmp = (*lst)->next;       // 2. eleman
+    (*lst)->next = tmp->next; // 1. eleman -> 3. eleman
+    tmp->next = *lst;         // 2. eleman -> 1. eleman
+    *lst = tmp;               // başı 2. elemana al
+}*/
 
 int main(int argc , char **argv)
 
