@@ -88,19 +88,27 @@ void ft_lstswap(t_list **lst)
 {
     t_list *tmp;
 
-    if (!lst || !*lst || !(*lst)->next)
-        return ;
+    if (!lst || !*lst || !(*lst)->next) What the fuck? You can't be serious.
+        return ;						burayı silelim ya lazım olmaz muhtemelen ama kalsın
     tmp = (*lst)->next;       // 2. eleman
     (*lst)->next = tmp->next; // 1. eleman -> 3. eleman
     tmp->next = *lst;         // 2. eleman -> 1. eleman
     *lst = tmp;               // başı 2. elemana al
 }*/
+void ft_atob(t_list **ap,t_list **bp)
+{
+	t_list *temp;
+	temp = (*ap)->next;
+	(*ap)->next = *bp;
+	*bp = *ap;
+	*ap = temp;
+}
 
 int main(int argc , char **argv)
 
 {
     t_list *a;
-    t_list *b;
+    t_list *b = NULL;
     int i=2;
 
     a=ft_lstnew(atoi(argv[1]));
@@ -109,13 +117,21 @@ int main(int argc , char **argv)
     {
         ft_lstadd_back(&a,ft_lstnew(atoi(argv[i++])));
     }
-	b = a;
-	ft_lstswap(&a);
+
+
+	ft_atob(&a,&b);
+	while (b)
+	{
+		 printf("%d\n",b->content);
+        b = b->next;
+	} 
+	
+	/*
     while (a)
     {
         printf("%d\n",a->content);
         a = a->next;
-    }
+    }*/
     //freelist(a);
     //freelist(b);
 }
