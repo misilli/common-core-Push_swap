@@ -84,6 +84,38 @@ void ft_lstswap(t_list **lst)
     *lst = second;
 }
 
+int sa(t_list ** a_st)
+{
+	if(a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
+		return (0); 
+	ft_lstswap(a_st);
+	ft_putstr("sa\n");
+	return (1);
+
+}
+
+int sb(t_list ** b_st)
+{
+	if(b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
+		return (0); 
+	ft_lstswap(b_st);
+	ft_putstr("sb\n");
+	return (1);
+
+}
+
+int ss(t_list ** a_st, t_list ** b_st)
+{
+	if(a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
+		return (0); 
+	if(b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
+		return (0); 
+	ft_lstswap(a_st);
+	ft_lstswap(b_st);
+	ft_putstr("ss\n");
+	return (1);
+}
+
 /*void ft_lstswap(t_list **lst)
 {
     t_list *tmp;
@@ -95,7 +127,7 @@ void ft_lstswap(t_list **lst)
     tmp->next = *lst;         // 2. eleman -> 1. eleman
     *lst = tmp;               // başı 2. elemana al
 }*/
-void ft_atob(t_list **ap,t_list **bp)
+void ft_atob(t_list **ap,t_list **bp)//aslında bu push
 {
 	t_list *temp;
 	temp = (*ap)->next;
@@ -103,6 +135,26 @@ void ft_atob(t_list **ap,t_list **bp)
 	*bp = *ap;
 	*ap = temp;
 }
+
+int pa(t_list **a_st, t_list **b_st)
+{
+	if (!a_st || !b_st )
+		return (0);
+	ft_atob(a_st, b_st);
+	ft_putstr("pa\n");
+	return (1);
+}
+
+int pb(t_list **a_st, t_list **b_st)
+{
+	if (!a_st || !b_st)
+		return (0);
+	ft_atob(b_st, a_st);
+	ft_putstr("pb\n");
+	return (1);
+}
+
+//rotate reverse rotate yapılacak
 
 int main(int argc , char **argv)
 
