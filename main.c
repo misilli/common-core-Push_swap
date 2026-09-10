@@ -107,7 +107,7 @@ void ft_atob(t_list **ap,t_list **bp)
 int main(int argc , char **argv)
 
 {
-    t_list *a;
+    t_list *a = NULL;
     t_list *b = NULL;
     int i=2;
 
@@ -118,14 +118,27 @@ int main(int argc , char **argv)
         ft_lstadd_back(&a,ft_lstnew(atoi(argv[i++])));
     }
 
-
-	ft_atob(&a,&b);
+	while (a)
+	{
+		if (a->next != NULL &&a->content > (a->next)->content)
+		{
+			ft_lstswap(&a);
+			printf("kosul");
+		}
+		
+		ft_atob(&a,&b);
+	}
+	
 	while (b)
 	{
-		 printf("%d\n",b->content);
+		 printf("b stck :%d\n",b->content);
         b = b->next;
 	} 
-	
+	while (a)
+	{
+		 printf("a stck :%d\n",a->content);
+        a = a->next;
+	} 
 	/*
     while (a)
     {
