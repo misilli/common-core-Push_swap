@@ -12,12 +12,18 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-typedef struct s_list
+#include "push_swap.h"
+void	ft_putstr(char *s)
 {
-	int             content;
-	struct s_list	*next;
-}					t_list;
+	int	i;
 
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+}
 int	ft_atoi(const char *str)
 {
 	long	value;
@@ -70,91 +76,17 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
-void ft_lstswap(t_list **lst)
-{
-    t_list *first;
-    t_list *second;
 
-    if (!lst || !*lst || !(*lst)->next)
-        return ;
-    first = *lst;
-    second = first->next;
-    first->next = second->next;
-    second->next = first;
-    *lst = second;
-}
-
-int sa(t_list ** a_st)
-{
-	if(a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
-		return (0); 
-	ft_lstswap(a_st);
-	ft_putstr("sa\n");
-	return (1);
-
-}
-
-int sb(t_list ** b_st)
-{
-	if(b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
-		return (0); 
-	ft_lstswap(b_st);
-	ft_putstr("sb\n");
-	return (1);
-
-}
-
-int ss(t_list ** a_st, t_list ** b_st)
-{
-	if(a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
-		return (0); 
-	if(b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
-		return (0); 
-	ft_lstswap(a_st);
-	ft_lstswap(b_st);
-	ft_putstr("ss\n");
-	return (1);
-}
-
-/*void ft_lstswap(t_list **lst)
-{
-    t_list *tmp;
-
-    if (!lst || !*lst || !(*lst)->next) What the fuck? You can't be serious.
-        return ;						burayı silelim ya lazım olmaz muhtemelen ama kalsın
-    tmp = (*lst)->next;       // 2. eleman
-    (*lst)->next = tmp->next; // 1. eleman -> 3. eleman
-    tmp->next = *lst;         // 2. eleman -> 1. eleman
-    *lst = tmp;               // başı 2. elemana al
-}*/
-void ft_atob(t_list **ap,t_list **bp)//aslında bu push
-{
-	t_list *temp;
-	temp = (*ap)->next;
-	(*ap)->next = *bp;
-	*bp = *ap;
-	*ap = temp;
-}
-
-int pa(t_list **a_st, t_list **b_st)
-{
-	if (!a_st || !b_st )
-		return (0);
-	ft_atob(a_st, b_st);
-	ft_putstr("pa\n");
-	return (1);
-}
-
-int pb(t_list **a_st, t_list **b_st)
-{
-	if (!a_st || !b_st)
-		return (0);
-	ft_atob(b_st, a_st);
-	ft_putstr("pb\n");
-	return (1);
-}
 
 //rotate reverse rotate yapılacak
+void simple(t_list **a , t_list **b)
+{
+	while (!*a)
+	{
+		
+	}
+	
+}
 
 int main(int argc , char **argv)
 
@@ -164,11 +96,11 @@ int main(int argc , char **argv)
     int i=2;
 
     a=ft_lstnew(atoi(argv[1]));
-
     while (i<argc)
     {
         ft_lstadd_back(&a,ft_lstnew(atoi(argv[i++])));
     }
+	simple(&a,&b);
 
 	while (a)
 	{
