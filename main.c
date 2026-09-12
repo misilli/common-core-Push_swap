@@ -12,7 +12,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "push_swap.h"
+
+
 void	ft_putstr(char *s)
 {
 	int	i;
@@ -81,9 +84,16 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 //rotate reverse rotate yapılacak
 void simple(t_list **a , t_list **b)
 {
+	
 	while (!*a)
 	{
+		while ((**a).content  )
+		{
+			/* code */
+		}
 		
+		
+		pb(a,b);
 	}
 	
 }
@@ -94,8 +104,8 @@ int main(int argc , char **argv)
     t_list *a = NULL;
     t_list *b = NULL;
     int i=2;
-
-    a=ft_lstnew(atoi(argv[1]));
+	//argümanları kontrol eden fonksioynu
+    a=ft_lstnew(atoi(argv[1]));// split kullan "1 2 3" şeklinde kullanıyor 
     while (i<argc)
     {
         ft_lstadd_back(&a,ft_lstnew(atoi(argv[i++])));
