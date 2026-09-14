@@ -14,14 +14,11 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
-
-
 typedef struct s_list
 {
-	int				content;
-	struct s_list	*next;
-}					t_list;
+	int content;
+	struct s_list *next;
+} t_list;
 void ft_putstr(char *s)
 {
 	int i;
@@ -35,44 +32,42 @@ void ft_putstr(char *s)
 }
 void ft_lstswap(t_list **lst)
 {
-    t_list *first;
-    t_list *second;
+	t_list *first;
+	t_list *second;
 
-    if (!lst || !*lst || !(*lst)->next)
-        return ;
-    first = *lst;
-    second = first->next;
-    first->next = second->next;
-    second->next = first;
-    *lst = second;
+	if (!lst || !*lst || !(*lst)->next)
+		return;
+	first = *lst;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*lst = second;
 }
 
-int sa(t_list ** a_st)
+int sa(t_list **a_st)
 {
-	if(a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
-		return (0); 
+	if (a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
+		return (0);
 	ft_lstswap(a_st);
 	ft_putstr("sa\n");
 	return (1);
-
 }
 
-int sb(t_list ** b_st)
+int sb(t_list **b_st)
 {
-	if(b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
-		return (0); 
+	if (b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
+		return (0);
 	ft_lstswap(b_st);
 	ft_putstr("sb\n");
 	return (1);
-
 }
 
-int ss(t_list ** a_st, t_list ** b_st)
+int ss(t_list **a_st, t_list **b_st)
 {
-	if(a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
-		return (0); 
-	if(b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
-		return (0); 
+	if (a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
+		return (0);
+	if (b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
+		return (0);
 	ft_lstswap(a_st);
 	ft_lstswap(b_st);
 	ft_putstr("ss\n");
@@ -81,16 +76,16 @@ int ss(t_list ** a_st, t_list ** b_st)
 
 /*void ft_lstswap(t_list **lst)
 {
-    t_list *tmp;
+	t_list *tmp;
 
-    if (!lst || !*lst || !(*lst)->next) What the fuck? You can't be serious.
-        return ;						burayı silelim ya lazım olmaz muhtemelen ama kalsın
-    tmp = (*lst)->next;       // 2. eleman
-    (*lst)->next = tmp->next; // 1. eleman -> 3. eleman
-    tmp->next = *lst;         // 2. eleman -> 1. eleman
-    *lst = tmp;               // başı 2. elemana al
+	if (!lst || !*lst || !(*lst)->next) What the fuck? You can't be serious.
+		return ;						burayı silelim ya lazım olmaz muhtemelen ama kalsın
+	tmp = (*lst)->next;       // 2. eleman
+	(*lst)->next = tmp->next; // 1. eleman -> 3. eleman
+	tmp->next = *lst;         // 2. eleman -> 1. eleman
+	*lst = tmp;               // başı 2. elemana al
 }*/
-void ft_atob(t_list **ap,t_list **bp)//aslında bu push
+void ft_atob(t_list **ap, t_list **bp) // aslında bu push
 {
 	t_list *temp;
 	temp = (*ap)->next;
@@ -117,9 +112,9 @@ int pb(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-unsigned int	ft_lstsize(t_list *lst)
+unsigned int ft_lstsize(t_list *lst)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (lst)
@@ -136,7 +131,7 @@ void rotate(t_list **lst)
 	t_list *last;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return ;
+		return;
 	first = *lst;
 	last = *lst;
 	while (last->next != NULL)
@@ -144,7 +139,7 @@ void rotate(t_list **lst)
 	*lst = first->next;
 	first->next = NULL;
 	last->next = first;
-} 
+}
 
 int ra(t_list **a_st)
 {
@@ -181,7 +176,7 @@ void reverse_rotate(t_list **lst)
 	t_list *last;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return ;
+		return;
 	last = *lst;
 	while ((last->next)->next != NULL)
 	{
@@ -221,8 +216,6 @@ int rrr(t_list **a_st, t_list **b_st)
 	ft_putstr("rrr\n");
 	return (1);
 }
-
-
 
 int ft_atoi(const char *str)
 {
@@ -280,8 +273,6 @@ void ft_lstadd_back(t_list **lst, t_list *new)
 int siralamacheck(t_list *a)
 {
 
-	
-
 	while (a && a->next)
 	{
 		if (a->content > a->next->content)
@@ -290,47 +281,111 @@ int siralamacheck(t_list *a)
 	}
 	return (1);
 }
+int ft_getmin(t_list *a) // headı kaybetmeyecek şekilde tanımla daha sonra
+{
+	t_list *head;
+	int min;
+
+	head = a;
+	if (!head)
+		return (0);
+	min = head->content;
+	while (head)
+	{
+		if (head->content < min)
+			min = head->content;
+		head = head->next;
+	}
+	return (min);
+}
 
 void simple(t_list **a, t_list **b)
 {
-    int i;
-    int len;
 
-    if (!a || !*a || !(*a)->next)
-        return ;
+	int enkuck;
+	while (*a)
+	{
+		enkuck = ft_getmin(*a);
+		while (enkuck != (*a)->content)
+		{
+			ra(a);
+		}
+		pb(a, b);
+	}
+
+	/*int i;
+	int len;
+
+	if (!a || !*a || !(*a)->next)
+		return ;
 	pb(a, b);
-    while (*a )
-    {
-		
+	while (*a )
+	{
 		if ((*a)->next && (*a)->content < (*a)->next->content)
-            sa(a);
-		
+			sa(a);
+
 		if (*b && *a && (*b)->content < (*a)->content)
-            pb(a, b);
+			pb(a, b);
 		else
 			ra(a);
 
-        
-    }
+
+	}
 	while (*b)
-            pa(a, b);
+			pa(a, b);
 	if (!siralamacheck(*a))
 		return ;
-	simple(a, b);
+	simple(a, b);*/
 }
-int main(int argc, char ** argv)
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (little[j] == '\0')
+		return ((char *)big);
+	while (i < len && big[i] != '\0')
+	{
+		while ((i + j) < len && big[i + j] == little[j] && big[i + j] != '\0')
+			j++;
+		if (little[j] == '\0')
+			return ((char *)&big[i]);
+		i++;
+		j = 0;
+	}
+	return (NULL);
+}
+
+int main(int argc, char **argv)
+{
+	char *flags;
 	t_list *a = NULL;
 	t_list *b = NULL;
-	int i = 2;
+	int i = 1;
 	// argümanları kontrol eden fonksioynu
 	if (argc < 2)
 		return (1);
-	a = ft_lstnew(atoi(argv[1])); // split kullan "1 2 3" şeklinde kullanıyor
-	while (i < argc)
+	if(ft_strnstr(argv[i] ,"--",2))//alsında split bunların hepsini ayırcak sonra bunu çalıştırcaz
+		flags = argv[i++];
+	printf("%s",flags);
+	
+	a = ft_lstnew(atoi(argv[i])); // split kullan "1 2 3" şeklinde kullanıyor
+
+	while (i < argc - 1)
 	{
 		ft_lstadd_back(&a, ft_lstnew(atoi(argv[i++])));
 	}
+	int len = 0;
+	t_list *tmp = a;
+	while (tmp)
+	{
+		len++;
+		tmp = tmp->next;
+	}
+	printf("liste boyu: %d\n", len);
 	simple(&a, &b);
 
 	/*while (a)
