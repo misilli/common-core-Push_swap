@@ -2,24 +2,36 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2026/09/02 22:09:27 by mumidill          #+#    #+#             */
 /*   Updated: 2026/09/02 22:09:27 by mumidill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+
 
 typedef struct s_list
 {
 	int content;
 	struct s_list *next;
 } t_list;
-void ft_putstr(char *s)
+
+typedef struct s_main
+{
+	t_list *a;
+	t_list *b;
+	char *flags;
+
+} t_main;
+void	ft_putstr(char *s)
 {
 	int i;
 
@@ -30,13 +42,13 @@ void ft_putstr(char *s)
 		i++;
 	}
 }
-void ft_lstswap(t_list **lst)
+void	ft_lstswap(t_list **lst)
 {
 	t_list *first;
 	t_list *second;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return;
+		return ;
 	first = *lst;
 	second = first->next;
 	first->next = second->next;
@@ -44,7 +56,7 @@ void ft_lstswap(t_list **lst)
 	*lst = second;
 }
 
-int sa(t_list **a_st)
+int	sa(t_list **a_st)
 {
 	if (a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
 		return (0);
@@ -53,7 +65,7 @@ int sa(t_list **a_st)
 	return (1);
 }
 
-int sb(t_list **b_st)
+int	sb(t_list **b_st)
 {
 	if (b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
 		return (0);
@@ -62,7 +74,7 @@ int sb(t_list **b_st)
 	return (1);
 }
 
-int ss(t_list **a_st, t_list **b_st)
+int	ss(t_list **a_st, t_list **b_st)
 {
 	if (a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
 		return (0);
@@ -85,7 +97,7 @@ int ss(t_list **a_st, t_list **b_st)
 	tmp->next = *lst;         // 2. eleman -> 1. eleman
 	*lst = tmp;               // başı 2. elemana al
 }*/
-void ft_atob(t_list **ap, t_list **bp) // aslında bu push
+void	ft_atob(t_list **ap, t_list **bp) // aslında bu push
 {
 	t_list *temp;
 	temp = (*ap)->next;
@@ -94,7 +106,7 @@ void ft_atob(t_list **ap, t_list **bp) // aslında bu push
 	*ap = temp;
 }
 
-int pa(t_list **a_st, t_list **b_st)
+int	pa(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !b_st || !*b_st)
 		return (0);
@@ -103,7 +115,7 @@ int pa(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-int pb(t_list **a_st, t_list **b_st)
+int	pb(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !b_st || !*a_st)
 		return (0);
@@ -112,7 +124,7 @@ int pb(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-unsigned int ft_lstsize(t_list *lst)
+unsigned int	ft_lstsize(t_list *lst)
 {
 	int i;
 
@@ -125,13 +137,13 @@ unsigned int ft_lstsize(t_list *lst)
 	return (i);
 }
 
-void rotate(t_list **lst)
+void	rotate(t_list **lst)
 {
 	t_list *first;
 	t_list *last;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return;
+		return ;
 	first = *lst;
 	last = *lst;
 	while (last->next != NULL)
@@ -141,7 +153,7 @@ void rotate(t_list **lst)
 	last->next = first;
 }
 
-int ra(t_list **a_st)
+int	ra(t_list **a_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -150,7 +162,7 @@ int ra(t_list **a_st)
 	return (1);
 }
 
-int rb(t_list **b_st)
+int	rb(t_list **b_st)
 {
 	if (!b_st || !*b_st || !(*b_st)->next)
 		return (0);
@@ -159,7 +171,7 @@ int rb(t_list **b_st)
 	return (1);
 }
 
-int rr(t_list **a_st, t_list **b_st)
+int	rr(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -171,12 +183,12 @@ int rr(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-void reverse_rotate(t_list **lst)
+void	reverse_rotate(t_list **lst)
 {
 	t_list *last;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return;
+		return ;
 	last = *lst;
 	while ((last->next)->next != NULL)
 	{
@@ -187,7 +199,7 @@ void reverse_rotate(t_list **lst)
 	last->next = NULL;
 }
 
-int rra(t_list **a_st)
+int	rra(t_list **a_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -196,7 +208,7 @@ int rra(t_list **a_st)
 	return (1);
 }
 
-int rrb(t_list **b_st)
+int	rrb(t_list **b_st)
 {
 	if (!b_st || !*b_st || !(*b_st)->next)
 		return (0);
@@ -205,7 +217,7 @@ int rrb(t_list **b_st)
 	return (1);
 }
 
-int rrr(t_list **a_st, t_list **b_st)
+int	rrr(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -217,7 +229,7 @@ int rrr(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long value;
 	int i;
@@ -241,7 +253,7 @@ int ft_atoi(const char *str)
 	return (value * sign);
 }
 
-t_list *ft_lstnew(int content)
+t_list	*ft_lstnew(int content)
 {
 	t_list *test;
 
@@ -253,16 +265,16 @@ t_list *ft_lstnew(int content)
 	return (test);
 }
 
-void ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list *tmp;
 
 	if (!lst || !new)
-		return;
+		return ;
 	if (*lst == NULL)
 	{
 		*lst = new;
-		return;
+		return ;
 	}
 	tmp = *lst;
 	while (tmp->next != NULL)
@@ -270,9 +282,8 @@ void ft_lstadd_back(t_list **lst, t_list *new)
 	tmp->next = new;
 }
 
-int siralamacheck(t_list *a)
+int	siralamacheck(t_list *a)
 {
-
 	while (a && a->next)
 	{
 		if (a->content > a->next->content)
@@ -281,7 +292,7 @@ int siralamacheck(t_list *a)
 	}
 	return (1);
 }
-int ft_getmin(t_list *a) // headı kaybetmeyecek şekilde tanımla daha sonra
+int	ft_getmin(t_list *a) // headı kaybetmeyecek şekilde tanımla daha sonra
 {
 	t_list *head;
 	int min;
@@ -299,9 +310,8 @@ int ft_getmin(t_list *a) // headı kaybetmeyecek şekilde tanımla daha sonra
 	return (min);
 }
 
-void simple(t_list **a, t_list **b)
+void	simple(t_list **a, t_list **b)
 {
-
 	int enkuck;
 	while (*a)
 	{
@@ -340,8 +350,8 @@ void simple(t_list **a, t_list **b)
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t i;
+	size_t j;
 
 	i = 0;
 	j = 0;
@@ -358,8 +368,28 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
+void	flagbulucu(void)
+{
+}
 
-int main(int argc, char **argv)
+int	compute_disorder(t_list *a)
+{
+	int total_pairs = 0;
+	int mistakes = 0;
+	t_list *current = a;
+
+	while (current && current->next)
+	{
+		total_pairs = total_pairs + 100;
+		if (current->content > current->next->content)
+			mistakes = mistakes + 100;
+		current = current->next;
+	}
+
+	return ((total_pairs / mistakes)*100); 
+}
+
+int	main(int argc, char **argv)
 {
 	char *flags;
 	t_list *a = NULL;
@@ -367,17 +397,22 @@ int main(int argc, char **argv)
 	int i = 1;
 	// argümanları kontrol eden fonksioynu
 	if (argc < 2)
-		return (1);
-	if(ft_strnstr(argv[i] ,"--",2))//alsında split bunların hepsini ayırcak sonra bunu çalıştırcaz
-		flags = argv[i++];
-	printf("%s",flags);
+		return (0);
+	//if (ft_strnstr(argv[i], "--", 2))
+		// alsında split bunların hepsini ayırcak sonra bunu çalıştırcaz
+		//flags = argv[i++];
 	
-	a = ft_lstnew(atoi(argv[i])); // split kullan "1 2 3" şeklinde kullanıyor
+	
+	//printf("%s", flags);
+
+	a = ft_lstnew(atoi(argv[i++])); // split kullan "1 2 3" şeklinde kullanıyor
 
 	while (i < argc - 1)
 	{
 		ft_lstadd_back(&a, ft_lstnew(atoi(argv[i++])));
 	}
+	int disorder = compute_disorder(a);
+	printf("Disorder: %d\n", disorder);
 	int len = 0;
 	t_list *tmp = a;
 	while (tmp)
