@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+      
+/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2026/09/02 22:09:27 by mumidill          #+#    #+#             */
 /*   Updated: 2026/09/02 22:09:27 by mumidill         ###   ########.fr       */
@@ -292,7 +292,7 @@ int	siralamacheck(t_list *a)
 	}
 	return (1);
 }
-int	ft_getmin(t_list *a) // headı kaybetmeyecek şekilde tanımla daha sonra
+int	ft_getmin(t_list *a)
 {
 	t_list *head;
 	int min;
@@ -372,21 +372,29 @@ void	flagbulucu(void)
 {
 }
 
-int	compute_disorder(t_list *a)
+double	compute_disorder(t_list *a)
 {
-	int total_pairs = 0;
-	int mistakes = 0;
-	t_list *current = a;
+	double total_pairs = 0;
+	double mistakes = 0;
+	t_list *i;
+	t_list *j;
 
-	while (current && current->next)
+	i = a;
+	while (i)
 	{
-		total_pairs = total_pairs + 100;
-		if (current->content > current->next->content)
-			mistakes = mistakes + 100;
-		current = current->next;
+		j = i->next;
+		while (j)
+		{
+			total_pairs++;
+			if (i->content > j->content)
+				mistakes++;
+			j = j->next;
+		}
+		i = i->next;
 	}
-
-	return ((total_pairs / mistakes)*100); 
+	if (total_pairs == 0)
+		return (0.0);
+	return (mistakes / total_pairs);
 }
 
 int	main(int argc, char **argv)
@@ -398,21 +406,20 @@ int	main(int argc, char **argv)
 	// argümanları kontrol eden fonksioynu
 	if (argc < 2)
 		return (0);
-	//if (ft_strnstr(argv[i], "--", 2))
-		// alsında split bunların hepsini ayırcak sonra bunu çalıştırcaz
-		//flags = argv[i++];
-	
-	
-	//printf("%s", flags);
+	// if (ft_strnstr(argv[i], "--", 2))
+	// alsında split bunların hepsini ayırcak sonra bunu çalıştırcaz
+	// flags = argv[i++];
+
+	// printf("%s", flags);
 
 	a = ft_lstnew(atoi(argv[i++])); // split kullan "1 2 3" şeklinde kullanıyor
 
-	while (i < argc - 1)
+	while (i < argc)
 	{
 		ft_lstadd_back(&a, ft_lstnew(atoi(argv[i++])));
 	}
-	int disorder = compute_disorder(a);
-	printf("Disorder: %d\n", disorder);
+	double disorder = compute_disorder(a);
+	printf("Disorder: %.2f\n", disorder);
 	int len = 0;
 	t_list *tmp = a;
 	while (tmp)
