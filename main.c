@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 typedef struct s_list
 {
 	int content;
@@ -31,7 +30,7 @@ typedef struct s_main
 	char *flags;
 
 } t_main;
-void	ft_putstr(char *s)
+void ft_putstr(char *s)
 {
 	int i;
 
@@ -42,13 +41,13 @@ void	ft_putstr(char *s)
 		i++;
 	}
 }
-void	ft_lstswap(t_list **lst)
+void ft_lstswap(t_list **lst)
 {
 	t_list *first;
 	t_list *second;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return ;
+		return;
 	first = *lst;
 	second = first->next;
 	first->next = second->next;
@@ -56,7 +55,7 @@ void	ft_lstswap(t_list **lst)
 	*lst = second;
 }
 
-int	sa(t_list **a_st)
+int sa(t_list **a_st)
 {
 	if (a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
 		return (0);
@@ -65,7 +64,7 @@ int	sa(t_list **a_st)
 	return (1);
 }
 
-int	sb(t_list **b_st)
+int sb(t_list **b_st)
 {
 	if (b_st == NULL || *b_st == NULL || (*b_st)->next == NULL)
 		return (0);
@@ -74,7 +73,7 @@ int	sb(t_list **b_st)
 	return (1);
 }
 
-int	ss(t_list **a_st, t_list **b_st)
+int ss(t_list **a_st, t_list **b_st)
 {
 	if (a_st == NULL || *a_st == NULL || (*a_st)->next == NULL)
 		return (0);
@@ -97,7 +96,7 @@ int	ss(t_list **a_st, t_list **b_st)
 	tmp->next = *lst;         // 2. eleman -> 1. eleman
 	*lst = tmp;               // başı 2. elemana al
 }*/
-void	ft_atob(t_list **ap, t_list **bp) // aslında bu push
+void ft_atob(t_list **ap, t_list **bp) // aslında bu push
 {
 	t_list *temp;
 	temp = (*ap)->next;
@@ -106,7 +105,7 @@ void	ft_atob(t_list **ap, t_list **bp) // aslında bu push
 	*ap = temp;
 }
 
-int	pa(t_list **a_st, t_list **b_st)
+int pa(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !b_st || !*b_st)
 		return (0);
@@ -115,7 +114,7 @@ int	pa(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-int	pb(t_list **a_st, t_list **b_st)
+int pb(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !b_st || !*a_st)
 		return (0);
@@ -124,7 +123,7 @@ int	pb(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-unsigned int	ft_lstsize(t_list *lst)
+unsigned int ft_lstsize(t_list *lst)
 {
 	int i;
 
@@ -137,13 +136,13 @@ unsigned int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-void	rotate(t_list **lst)
+void rotate(t_list **lst)
 {
 	t_list *first;
 	t_list *last;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return ;
+		return;
 	first = *lst;
 	last = *lst;
 	while (last->next != NULL)
@@ -153,7 +152,7 @@ void	rotate(t_list **lst)
 	last->next = first;
 }
 
-int	ra(t_list **a_st)
+int ra(t_list **a_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -162,7 +161,7 @@ int	ra(t_list **a_st)
 	return (1);
 }
 
-int	rb(t_list **b_st)
+int rb(t_list **b_st)
 {
 	if (!b_st || !*b_st || !(*b_st)->next)
 		return (0);
@@ -171,7 +170,7 @@ int	rb(t_list **b_st)
 	return (1);
 }
 
-int	rr(t_list **a_st, t_list **b_st)
+int rr(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -183,12 +182,12 @@ int	rr(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-void	reverse_rotate(t_list **lst)
+void reverse_rotate(t_list **lst)
 {
 	t_list *last;
 
 	if (!lst || !*lst || !(*lst)->next)
-		return ;
+		return;
 	last = *lst;
 	while ((last->next)->next != NULL)
 	{
@@ -199,7 +198,7 @@ void	reverse_rotate(t_list **lst)
 	last->next = NULL;
 }
 
-int	rra(t_list **a_st)
+int rra(t_list **a_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -208,7 +207,7 @@ int	rra(t_list **a_st)
 	return (1);
 }
 
-int	rrb(t_list **b_st)
+int rrb(t_list **b_st)
 {
 	if (!b_st || !*b_st || !(*b_st)->next)
 		return (0);
@@ -217,7 +216,7 @@ int	rrb(t_list **b_st)
 	return (1);
 }
 
-int	rrr(t_list **a_st, t_list **b_st)
+int rrr(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -229,7 +228,7 @@ int	rrr(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-int	ft_atoi(const char *str)
+int ft_atoi(const char *str)
 {
 	long value;
 	int i;
@@ -253,7 +252,7 @@ int	ft_atoi(const char *str)
 	return (value * sign);
 }
 
-t_list	*ft_lstnew(int content)
+t_list *ft_lstnew(int content)
 {
 	t_list *test;
 
@@ -265,16 +264,16 @@ t_list	*ft_lstnew(int content)
 	return (test);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list *tmp;
 
 	if (!lst || !new)
-		return ;
+		return;
 	if (*lst == NULL)
 	{
 		*lst = new;
-		return ;
+		return;
 	}
 	tmp = *lst;
 	while (tmp->next != NULL)
@@ -282,7 +281,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	tmp->next = new;
 }
 
-int	siralamacheck(t_list *a)
+int siralamacheck(t_list *a)
 {
 	while (a && a->next)
 	{
@@ -292,7 +291,7 @@ int	siralamacheck(t_list *a)
 	}
 	return (1);
 }
-int	ft_getmin(t_list *a)
+int ft_getmin(t_list *a)
 {
 	t_list *head;
 	int min;
@@ -310,7 +309,7 @@ int	ft_getmin(t_list *a)
 	return (min);
 }
 
-void	simple(t_list **a, t_list **b)
+void simple(t_list **a, t_list **b)
 {
 	int enkuck;
 	while (*a)
@@ -348,7 +347,7 @@ void	simple(t_list **a, t_list **b)
 	simple(a, b);*/
 }
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char *ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t i;
 	size_t j;
@@ -368,11 +367,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-void	flagbulucu(void)
-{
-}
 
-double	compute_disorder(t_list *a)
+double compute_disorder(t_list *a)
 {
 	double total_pairs = 0;
 	double mistakes = 0;
@@ -397,9 +393,100 @@ double	compute_disorder(t_list *a)
 	return (mistakes / total_pairs);
 }
 
-int	main(int argc, char **argv)
+static char **free_memory(char **final, int j)
 {
-	char *flags;
+	while (j >= 0)
+	{
+		free(final[j]);
+		j--;
+	}
+	free(final);
+	return (NULL);
+}
+
+static int ft_wordlen(char const *s, char c)
+{
+	size_t len;
+
+	len = 0;
+	while (s[len] != c && s[len] != '\0')
+		len++;
+	return (len);
+}
+
+static char **ft_splitfill(char **final, char const *s, char c)
+{
+	int i;
+	int j;
+	int k;
+
+	j = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
+		{
+			k = ft_wordlen(s + i, c);
+			final[j] = malloc(sizeof(char) * (k + 1));
+			if (!final[j])
+				return (free_memory(final, j - 1));
+			ft_strlcpy(final[j++], s + i, k + 1);
+			i = i + k;
+		}
+		else
+			i++;
+	}
+	final[j] = NULL;
+	return (final);
+}
+
+char **ft_split(char const *s, char c)
+{
+	char **final;
+	int i;
+	int word;
+
+	i = 0;
+	word = 0;
+	if (!s)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
+			word++;
+		i++;
+	}
+	final = malloc(sizeof(char *) * (word + 1));
+	if (!final)
+		return (NULL);
+	return (ft_splitfill(final, s, c));
+}
+
+char ***flagbulucu(char **argv) // falagı argüamn olrak al
+{
+	char ***temp;
+	char **hepsiburaya;
+	int i;
+	int j;
+
+	i = 1;
+	while (argv[i])
+		i++;
+	temp = malloc(sizeof(char ***) * (i));
+	i = 1;
+	j = 0;
+	while (argv[i])					   // temp herseferinde üzerine yazılıyor ayrı bir pointera at kaybolmasın
+	{								   // her seferinde temp[0] temp[1] temp[2] temp[3]
+		temp[i] = ft_split(argv[i], ' '); //"adaptive" "1" "2" "3" "4" "5" "6" "7" bunları boşver uc  boyutlşu yaocam
+		i++;
+	}
+	temp[i - 1] = NULL;
+	return (temp);
+}
+
+int main(int argc, char **argv)
+{
+	char ***arguments;
 	t_list *a = NULL;
 	t_list *b = NULL;
 	int i = 1;
@@ -411,7 +498,8 @@ int	main(int argc, char **argv)
 	// flags = argv[i++];
 
 	// printf("%s", flags);
-
+	arguments =flagbulucu(argv);
+	flagkontrol(arguments);// 4 tane string var zaten birde sayılar kontrol edilcek tekrar eden olmıcak printf("Error"); yazdırcak
 	a = ft_lstnew(atoi(argv[i++])); // split kullan "1 2 3" şeklinde kullanıyor
 
 	while (i < argc)
@@ -441,7 +529,7 @@ int	main(int argc, char **argv)
 		ft_atob(&a, &b);
 	}*/
 
-	while (b)
+	/*while (b)
 	{
 		printf("b stck :%d\n", b->content);
 		b = b->next;
@@ -450,7 +538,7 @@ int	main(int argc, char **argv)
 	{
 		printf("a stck :%d\n", a->content);
 		a = a->next;
-	}
+	}*/
 	/*
 	while (a)
 	{
