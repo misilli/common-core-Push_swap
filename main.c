@@ -43,14 +43,11 @@ typedef struct s_counter
 	int rra_count;
 	int rrb_count;
 	int rrr_count;
-	int (*total)(struct s_counter *counter);// buna bir toplama fonksiyonu yaz
+	int (*total)(struct s_counter *counter); // buna bir toplama fonksiyonu yaz
 } t_counter;
 void ft_putstr(char *s)
 {
 	int i;
-	t_counter a;
-
-	a.total(&a);
 
 	i = 0;
 	while (s[i])
@@ -329,6 +326,29 @@ int ft_getmin(t_list *a)
 	return (min);
 }
 
+size_t ft_strlcpy(char *dest, const char *src, size_t size)
+{
+	size_t i;
+	size_t j;
+
+	j = 0;
+	i = 0;
+	while (i + 1 < size && src[i] != 0)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	if (size != 0)
+	{
+		dest[i] = '\0';
+	}
+	while (src[j])
+	{
+		j++;
+	}
+	return (j);
+}
+
 void simple(t_list **a, t_list **b)
 {
 	int enkuck;
@@ -340,6 +360,11 @@ void simple(t_list **a, t_list **b)
 			ra(a);
 		}
 		pb(a, b);
+	}
+
+	while (*b)
+	{
+		pa(a, b);
 	}
 
 	/*int i;
@@ -486,26 +511,48 @@ char **ft_split(char const *s, char c)
 char ***flagbulucu(char **argv) // falagı argüamn olrak al
 {
 	char ***temp;
-	char **hepsiburaya;
 	int i;
-	int j;
 
 	i = 1;
 	while (argv[i])
 		i++;
-	temp = malloc(sizeof(char ***) * (i));
+	temp = malloc(sizeof(char ***) * (i + 1));
+	if (!temp)
+		return (NULL);
 	i = 1;
-	j = 0;
 	while (argv[i])						  // temp herseferinde üzerine yazılıyor ayrı bir pointera at kaybolmasın
 	{									  // her seferinde temp[0] temp[1] temp[2] temp[3]
 		temp[i] = ft_split(argv[i], ' '); //"adaptive" "1" "2" "3" "4" "5" "6" "7" bunları boşver uc  boyutlşu yaocam
 		i++;
 	}
-	temp[i - 1] = NULL;
+	temp[i] = NULL;
 	return (temp);
+}
+int ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
 }
 int ft_sayiyerlestirme(char ***temp, t_main **arguments2)
 {
+	int i;
+	int j;
+
+	i = 1;
+
+	while (temp[i])
+	{
+		j = 0;
+		while (temp[i][j])
+		{
+			if (!ft_isdigit(temp[i][j][0]))
+				return (0);
+			ft_lstadd_back(&((*arguments2)->a),
+						   ft_lstnew(ft_atoi(temp[i][j])));
+			j++;
+		}
+		i++;
+	}
+
 	return (1);
 }
 
@@ -514,6 +561,12 @@ int flagkontrol(char ***temp, t_main **arguments2)
 	int i;
 	int j;
 
+	*arguments2 = malloc(sizeof(t_main));
+	if (!*arguments2)
+		return (0);
+	(*arguments2)->flags = NULL;
+	(*arguments2)->a = NULL;
+	(*arguments2)->b = NULL;
 	i = 1;
 	while (temp[i])
 	{
@@ -522,29 +575,20 @@ int flagkontrol(char ***temp, t_main **arguments2)
 		{
 			if ((*arguments2)->flags) // arguments varsa daha önce 0 değer donuyor
 				return (0);
-			*arguments2 = malloc(sizeof(t_main));
-			if (!(*arguments2))
-				return (0);
-			(*arguments2)->flags = temp[i][j];
-			(*arguments2)->a = NULL;
-			(*arguments2)->b = NULL;
+			(*arguments2)->flags = &(temp[i][j]);
 			j++;
 		}
 		i++;
 	}
-	if ( ft_sayiyerlestirme(temp,arguments2))
-		return 0;
-	return 1;
-	
+	if (ft_sayiyerlestirme(temp, arguments2))
+		return 1;
+	return 0;
 }
 
-int main(int argc, char **argv)//hareketleri saymalıyız
+int main(int argc, char **argv) // hareketleri saymalıyız
 {
 	char ***arguments;
-	t_list *a = NULL;
-	t_list *b = NULL;
 	t_main *arguments2 = NULL;
-	int i = 1;
 	// argümanları kontrol eden fonksioynu
 	if (argc < 2)
 		return (0);
@@ -554,24 +598,30 @@ int main(int argc, char **argv)//hareketleri saymalıyız
 
 	// printf("%s", flags);
 	arguments = flagbulucu(argv);
-	flagkontrol(arguments, &arguments2); // 4 tane string var zaten birde sayılar kontrol edilcek tekrar eden olmıcak printf("Error"); yazdırcak
-	a = ft_lstnew(atoi(argv[i++]));		 // split kullan "1 2 3" şeklinde kullanıyor
+	// 4 tane string var zaten birde sayılar kontrol edilcek tekrar eden olmıcak printf("Error"); yazdırcak
+	if (!flagkontrol(arguments, &arguments2))
+	{
+		printf("hata");
+		return (1);
+	}
 
-	while (i < argc)
+	// a = ft_lstnew(atoi(argv[i++]));		 // split kullan "1 2 3" şeklinde kullanıyor
+
+	/*while (i < argc)
 	{
 		ft_lstadd_back(&a, ft_lstnew(atoi(argv[i++])));
-	}
-	double disorder = compute_disorder(a);
+	}*/
+	double disorder = compute_disorder(arguments2->a);
 	printf("Disorder: %.2f\n", disorder);
 	int len = 0;
-	t_list *tmp = a;
+	t_list *tmp = arguments2->a;
 	while (tmp)
 	{
 		len++;
 		tmp = tmp->next;
 	}
 	printf("liste boyu: %d\n", len);
-	simple(&a, &b);
+	simple(&arguments2->a, &arguments2->b);
 
 	/*while (a)
 	{
@@ -584,16 +634,16 @@ int main(int argc, char **argv)//hareketleri saymalıyız
 		ft_atob(&a, &b);
 	}*/
 
-	/*while (b)
+	while (arguments2->b)
 	{
-		printf("b stck :%d\n", b->content);
-		b = b->next;
+		printf("b stck :%d\n", arguments2->b->content);
+		arguments2->b = arguments2->b->next;
 	}
-	while (a)
+	while (arguments2->a)
 	{
-		printf("a stck :%d\n", a->content);
-		a = a->next;
-	}*/
+		printf("a stck :%d\n", arguments2->a->content);
+		arguments2->a = arguments2->a->next;
+	}
 	/*
 	while (a)
 	{
