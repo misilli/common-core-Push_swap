@@ -28,6 +28,7 @@ typedef struct s_main
 	t_list *a;
 	t_list *b;
 	char **flags;
+	int fcount;
 
 } t_main;
 typedef struct s_counter
@@ -544,6 +545,11 @@ int ft_sayiyerlestirme(char ***temp, t_main **arguments2)
 		j = 0;
 		while (temp[i][j])
 		{
+			if (ft_strnstr(temp[i][j], "--", 2))
+			{
+				j++;
+				continue;
+			}
 			if (!ft_isdigit(temp[i][j][0]))
 				return (0);
 			ft_lstadd_back(&((*arguments2)->a),
@@ -556,42 +562,47 @@ int ft_sayiyerlestirme(char ***temp, t_main **arguments2)
 	return (1);
 }
 
-int flagkontrol(char ***temp, t_main **arguments2)
+int	flagkontrol(char ***temp, t_main **arguments2)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	*arguments2 = malloc(sizeof(t_main));
 	if (!*arguments2)
 		return (0);
-	(*arguments2)->flags = NULL;
+	(*arguments2)->fcount = 0;
 	(*arguments2)->a = NULL;
 	(*arguments2)->b = NULL;
+	(*arguments2)->flags = malloc(sizeof(char *) * 3);
+	if (!(*arguments2)->flags)
+		return (0);
 	i = 1;
 	while (temp[i])
 	{
 		j = 0;
-		while (ft_strnstr(temp[i][j], "--", 2))
+		while (temp[i][j])
 		{
-			if ((*arguments2)->flags) // arguments varsa daha önce 0 değer donuyor
-				return (0);
-			(*arguments2)->flags = &(temp[i][j]);
+			if (ft_strnstr(temp[i][j], "--", 2))
+			{
+				if ((*arguments2)->fcount == 2)
+					return (0);
+				(*arguments2)->flags[(*arguments2)->fcount++] = temp[i][j];
+			}
 			j++;
 		}
 		i++;
 	}
-	if (ft_sayiyerlestirme(temp, arguments2))
-		return 1;
-	return 0;
+	return (ft_sayiyerlestirme(temp, arguments2));
 }
 
-int main(int argc, char **argv) // hareketleri saymalıyız
+int main(/*int argc, char **argv*/) // hareketleri saymalıyız
 {
+	char *argv[]={"burayiokumapls","--kalitesizflag","--kaliesizflag","--kaliteliflag","9","2","3", NULL};
 	char ***arguments;
 	t_main *arguments2 = NULL;
 	// argümanları kontrol eden fonksioynu
-	if (argc < 2)
-		return (0);
+	/*if (argc < 2)
+		return (0);*/
 	// if (ft_strnstr(argv[i], "--", 2))
 	// alsında split bunların hepsini ayırcak sonra bunu çalıştırcaz
 	// flags = argv[i++];
@@ -601,8 +612,8 @@ int main(int argc, char **argv) // hareketleri saymalıyız
 	// 4 tane string var zaten birde sayılar kontrol edilcek tekrar eden olmıcak printf("Error"); yazdırcak
 	if (!flagkontrol(arguments, &arguments2))
 	{
-		printf("hata");
-		return (1);
+		printf("hata\n");
+		return (1);//1 nin değeri döenrse terminal hata yazar
 	}
 
 	// a = ft_lstnew(atoi(argv[i++]));		 // split kullan "1 2 3" şeklinde kullanıyor
