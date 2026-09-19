@@ -1,30 +1,14 @@
 #include <stddef.h>
 #include "push_swap.h"
 
-char *ft_strnstr(const char *big, const char *little, size_t len)
+int ft_strcmp(const char *s1, const char *s2)
 {
-	size_t i;
-	size_t j;
-	size_t little_len;
+    size_t i;
 
-	if (!big || !little)
-		return (NULL);
-	little_len = 0;
-	while (little[little_len] != '\0')
-		little_len++;
-	if (little_len == 0)
-		return ((char *)big);
-	i = 0;
-	while (i + little_len <= len && big[i] != '\0')
-	{
-		j = 0;
-		while (j < little_len && big[i + j] == little[j])
-			j++;
-		if (j == little_len)
-			return ((char *)&big[i]);
-		i++;
-	}
-	return (NULL);
+    i = 0;
+    while (s1[i] == s2[i] && (s1[i] != '\0' || s2[i] != '\0'))
+        i++;
+    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 int ft_isdigit(int c)

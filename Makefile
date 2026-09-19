@@ -17,7 +17,7 @@ SRCS		= main.c \
 
 OBJS		= $(SRCS:.c=.o)
 
-all: $(NAME)
+all: $(NAME) clean
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
@@ -31,6 +31,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re: fclean all 
 
 .PHONY: all clean fclean re

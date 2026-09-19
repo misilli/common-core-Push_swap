@@ -61,7 +61,6 @@ int		ft_lstadd_back(t_list **lst, t_list *new_node);
 t_list	*ft_lstnew(int content);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_isdigit(int c);
 double	compute_disorder(t_list *a);
 void	ft_index(t_list *stack);
@@ -70,5 +69,6 @@ int		ft_adaptive(t_main *arguments2);
 int		ft_run_algorithm(t_main *arguments2);
 void		ft_bench(t_main *data);
 int simple(t_list **a, t_list **b, t_counter *counts);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

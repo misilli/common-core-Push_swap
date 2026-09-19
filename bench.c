@@ -6,7 +6,7 @@
 /*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 03:13:56 by mumidill          #+#    #+#             */
-/*   Updated: 2026/09/19 19:01:15 by mumidill         ###   ########.fr       */
+/*   Updated: 2026/09/19 23:04:40 by mumidill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ static void	ft_putnbr_fd(int n, int fd)
 
 static char	*strategy_name(char *algorithm)
 {
-	if (ft_strnstr(algorithm, "--simple", 8))
+	if (ft_strcmp(algorithm, "--simple") == 0)
 		return ("Simple");
-	if (ft_strnstr(algorithm, "--medium", 8))
+	if (ft_strcmp(algorithm, "--medium") == 0)
 		return ("Medium");
-	if (ft_strnstr(algorithm, "--complex", 9))
+	if (ft_strcmp(algorithm, "--complex") == 0)
 		return ("Complex");
 	return ("Adaptive");
 }
 
 static char	*strategy_class(char *algorithm)
 {
-	if (ft_strnstr(algorithm, "--simple", 8))
+	if (ft_strcmp(algorithm, "--simple") == 0)
 		return ("O(n²)");
-	if (ft_strnstr(algorithm, "--medium", 8))
+	if (ft_strcmp(algorithm, "--medium") == 0)
 		return ("O(n√n)");
 	return ("O(n log n)");
 }

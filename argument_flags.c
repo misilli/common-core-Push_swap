@@ -6,26 +6,26 @@
 /*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 18:43:15 by mumidill          #+#    #+#             */
-/*   Updated: 2026/09/19 18:44:33 by mumidill         ###   ########.fr       */
+/*   Updated: 2026/09/19 23:08:04 by mumidill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "push_swap.h"
+#include <stdlib.h>
 
 static int is_valid_flag(char *flag)
 {
 	if (!flag)
 		return (0);
-	if (ft_strnstr(flag, "--bench", 7))
+	if (ft_strcmp(flag, "--bench") == 0)
 		return (1);
-	if (ft_strnstr(flag, "--simple", 8))
+	if (ft_strcmp(flag, "--simple") == 0)
 		return (1);
-	if (ft_strnstr(flag, "--adaptive", 10))
+	if (ft_strcmp(flag, "--adaptive") == 0)
 		return (1);
-	if (ft_strnstr(flag, "--medium", 8))
+	if (ft_strcmp(flag, "--medium") == 0)
 		return (1);
-	if (ft_strnstr(flag, "--complex", 9))
+	if (ft_strcmp(flag, "--complex") == 0)
 		return (1);
 	return (0);
 }
@@ -72,20 +72,21 @@ static int init_main_state(t_main **data)
 	return (1);
 }
 
-static int append_number(char *token, t_main *state)
+static int is_valid_number_token(char *token)
 {
 	int i;
+	int sign;
 	int value;
-	t_list *new_node;
 
 	if (!token || token[0] == '\0')
 		return (0);
+	sign = 1;
 	i = 0;
 	if (token[0] == '+' || token[0] == '-')
 	{
-		if (!token[1] || !ft_isdigit((unsigned char)token[1]))
+		if (!token[1])
 			return (0);
-		i = 1;
+		sign = sign * (44 - token[i++]);
 	}
 	while (token[i])
 	{
@@ -93,6 +94,19 @@ static int append_number(char *token, t_main *state)
 			return (0);
 		i++;
 	}
+	value = ft_atoi(token);
+	if ((value == 0 && sign == -1) || (sign == -1 && value > 0) || (sign == 1 && value < 0))
+		return (0);
+	return (1);
+}
+
+static int append_number(char *token, t_main *state)
+{
+	int value;
+	t_list *new_node;
+
+	if (!is_valid_number_token(token))
+		return (0);
 	value = ft_atoi(token);
 	new_node = ft_lstnew(value);
 	return (ft_lstadd_back(&state->a, new_node));
@@ -102,7 +116,7 @@ static int handle_flag_token(char *token, t_main *state)
 {
 	if (!is_valid_flag(token))
 		return (0);
-	if (ft_strnstr(token, "--bench", 7))
+	if (ft_strcmp(token, "--bench") == 0)
 	{
 		if (state->bench)
 			return (0);

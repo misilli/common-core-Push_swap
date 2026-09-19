@@ -26,21 +26,18 @@ int simple(t_list **a, t_list **b, t_counter *counts)
 		while (*a && (*a)->content != min_value)
 		{
 			ra(a);
-			if (counts)
-				counts->ra_count++;
+			counts->ra_count++;
 		}
 		if (*a)
 		{
 			pb(a, b);
-			if (counts)
-				counts->pb_count++;
+			counts->pb_count++;
 		}
 	}
 	while (*b)
 	{
 		pa(a, b);
-		if (counts)
-			counts->pa_count++;
+		counts->pa_count++;
 	}
 	return (1);
 }

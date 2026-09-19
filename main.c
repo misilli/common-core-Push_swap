@@ -32,22 +32,22 @@ int ft_set_algorithm(t_main *arguments2)
 	i = 0;
 	while (i < arguments2->fcount)
 	{
-		if (ft_strnstr(arguments2->flags[i], "--simple", 8))
+		if (ft_strcmp(arguments2->flags[i], "--simple") == 0)
 		{
 			arguments2->algorithm = arguments2->flags[i];
 			return (1);
 		}
-		if (ft_strnstr(arguments2->flags[i], "--adaptive", 10))
+		if (ft_strcmp(arguments2->flags[i], "--adaptive") == 0)
 		{
 			arguments2->algorithm = arguments2->flags[i];
 			return (1);
 		}
-		if (ft_strnstr(arguments2->flags[i], "--medium", 8))
+		if (ft_strcmp(arguments2->flags[i], "--medium") == 0)
 		{
 			arguments2->algorithm = arguments2->flags[i];
 			return (1);
 		}
-		if (ft_strnstr(arguments2->flags[i], "--complex", 9))
+		if (ft_strcmp(arguments2->flags[i], "--complex") == 0)
 		{
 			arguments2->algorithm = arguments2->flags[i];
 			return (1);
@@ -61,7 +61,7 @@ int ft_adaptive(t_main *arguments2)
 {
 	if (!arguments2)
 		return (0);
-	if (arguments2->disorder < 0.2)
+	if (arguments2->disorder)
 		return (simple(&arguments2->a, &arguments2->b, arguments2->counts));
 	return (1);
 }
@@ -71,13 +71,13 @@ int ft_run_algorithm(t_main *arguments2)
 	if (!arguments2)
 		return (0);
 	ft_set_algorithm(arguments2);
-	if (ft_strnstr(arguments2->algorithm, "--simple", 8))
+	if (ft_strcmp(arguments2->algorithm, "--simple") == 0)
 		return (simple(&arguments2->a, &arguments2->b, arguments2->counts));
-	if (ft_strnstr(arguments2->algorithm, "--medium", 8))
+	if (ft_strcmp(arguments2->algorithm, "--medium") == 0)
 		return (1);
-	if (ft_strnstr(arguments2->algorithm, "--complex", 9))
+	if (ft_strcmp(arguments2->algorithm, "--complex") == 0)
 		return (1);
-	if (ft_strnstr(arguments2->algorithm, "--adaptive", 10))
+	if (ft_strcmp(arguments2->algorithm, "--adaptive") == 0)
 		return (ft_adaptive(arguments2));
 	return (1);
 }
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 	printf("Disorder: %.2f\n", data->disorder);
 	ft_index(data->a);
 	ft_run_algorithm(data);
-	if (data->bench && ft_strnstr(data->bench, "--bench", 7))
+	if (data->bench && ft_strcmp(data->bench, "--bench") == 0)
 	{
 		ft_bench(data);
 	}
