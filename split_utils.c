@@ -1,7 +1,7 @@
-#include <stdlib.h>
 #include "push_swap.h"
+#include <stdlib.h>
 
-static char **free_memory(char **final, int index)
+static char	**free_memory(char **final, int index)
 {
 	while (index >= 0)
 	{
@@ -12,9 +12,9 @@ static char **free_memory(char **final, int index)
 	return (NULL);
 }
 
-static int ft_wordlen(char const *s, char c)
+static int	ft_wordlen(char const *s, char c)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (s[len] != c && s[len] != '\0')
@@ -22,11 +22,11 @@ static int ft_wordlen(char const *s, char c)
 	return ((int)len);
 }
 
-static char **ft_splitfill(char **final, char const *s, char c)
+static char	**ft_splitfill(char **final, char const *s, char c)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
@@ -49,11 +49,11 @@ static char **ft_splitfill(char **final, char const *s, char c)
 	return (final);
 }
 
-char **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	char **final;
-	int i;
-	int word;
+	char	**final;
+	int		i;
+	int		word;
 
 	if (!s)
 		return (NULL);
@@ -71,10 +71,10 @@ char **ft_split(char const *s, char c)
 	return (ft_splitfill(final, s, c));
 }
 
-size_t ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	size_t i;
-	size_t len;
+	size_t	i;
+	size_t	len;
 
 	i = 0;
 	len = 0;

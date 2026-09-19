@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include <stdlib.h>
 
-static int is_valid_flag(char *flag)
+static int	is_valid_flag(char *flag)
 {
 	if (!flag)
 		return (0);
@@ -30,7 +30,7 @@ static int is_valid_flag(char *flag)
 	return (0);
 }
 
-static int init_main_state(t_main **data)
+static int	init_main_state(t_main **data)
 {
 	(*data) = (t_main *)malloc(sizeof(t_main));
 	if (!(*data))
@@ -72,11 +72,11 @@ static int init_main_state(t_main **data)
 	return (1);
 }
 
-static int is_valid_number_token(char *token)
+static int	is_valid_number_token(char *token)
 {
-	int i;
-	int sign;
-	int value;
+	int	i;
+	int	sign;
+	int	value;
 
 	if (!token || token[0] == '\0')
 		return (0);
@@ -95,15 +95,16 @@ static int is_valid_number_token(char *token)
 		i++;
 	}
 	value = ft_atoi(token);
-	if ((value == 0 && sign == -1) || (sign == -1 && value > 0) || (sign == 1 && value < 0))
+	if ((value == 0 && sign == -1) || (sign == -1 && value > 0) || (sign == 1
+			&& value < 0))
 		return (0);
 	return (1);
 }
 
-static int append_number(char *token, t_main *state)
+static int	append_number(char *token, t_main *state)
 {
-	int value;
-	t_list *new_node;
+	int		value;
+	t_list	*new_node;
 
 	if (!is_valid_number_token(token))
 		return (0);
@@ -112,7 +113,7 @@ static int append_number(char *token, t_main *state)
 	return (ft_lstadd_back(&state->a, new_node));
 }
 
-static int handle_flag_token(char *token, t_main *state)
+static int	handle_flag_token(char *token, t_main *state)
 {
 	if (!is_valid_flag(token))
 		return (0);
@@ -131,10 +132,10 @@ static int handle_flag_token(char *token, t_main *state)
 	return (1);
 }
 
-int flagkontrol(char ***temp, t_main **arguments2)
+int	flagkontrol(char ***temp, t_main **arguments2)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (!temp || !arguments2)
 		return (0);
@@ -160,11 +161,11 @@ int flagkontrol(char ***temp, t_main **arguments2)
 	return (arguments2 && (*arguments2)->a != NULL);
 }
 
-char ***flagbulucu(char **argv)
+char	***flagbulucu(char **argv)
 {
-	char ***temp;
-	int i;
-	int argc;
+	char	***temp;
+	int		i;
+	int		argc;
 
 	argc = 0;
 	while (argv[argc])

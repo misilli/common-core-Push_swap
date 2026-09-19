@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-void ft_atob(t_list **ap, t_list **bp)
+void	ft_atob(t_list **ap, t_list **bp)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = (*ap)->next;
 	(*ap)->next = *bp;
@@ -10,7 +10,7 @@ void ft_atob(t_list **ap, t_list **bp)
 	*ap = temp;
 }
 
-int pa(t_list **a_st, t_list **b_st)
+int	pa(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !b_st || !*b_st)
 		return (0);
@@ -19,7 +19,7 @@ int pa(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-int pb(t_list **a_st, t_list **b_st)
+int	pb(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !b_st || !*a_st)
 		return (0);
@@ -28,9 +28,9 @@ int pb(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-unsigned int ft_lstsize(t_list *lst)
+unsigned int	ft_lstsize(t_list *lst)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (lst)

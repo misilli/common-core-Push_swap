@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-static int ft_get_min(t_list *stack)
+static int	ft_get_min(t_list *stack)
 {
-	int min;
+	int	min;
 
 	if (!stack)
 		return (0);
@@ -16,9 +16,9 @@ static int ft_get_min(t_list *stack)
 	return (min);
 }
 
-int simple(t_list **a, t_list **b, t_counter *counts)
+int	simple(t_list **a, t_list **b, t_counter *counts)
 {
-	int min_value;
+	int	min_value;
 
 	while (*a)
 	{

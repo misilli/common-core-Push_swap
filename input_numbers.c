@@ -1,11 +1,11 @@
 #include "push_swap.h"
 #include <stdlib.h>
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	long value;
-	int i;
-	int sign;
+	long	value;
+	int		i;
+	int		sign;
 
 	i = 0;
 	value = 0;
@@ -25,9 +25,9 @@ int ft_atoi(const char *str)
 	return ((int)(value * sign));
 }
 
-t_list *ft_lstnew(int content)
+t_list	*ft_lstnew(int content)
 {
-	t_list *new_node;
+	t_list	*new_node;
 
 	new_node = (t_list *)malloc(sizeof(t_list));
 	if (!new_node)
@@ -38,9 +38,9 @@ t_list *ft_lstnew(int content)
 	return (new_node);
 }
 
-int ft_lstadd_back(t_list **lst, t_list *new_node)
+int	ft_lstadd_back(t_list **lst, t_list *new_node)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (!lst || !new_node)
 		return (0);

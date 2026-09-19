@@ -1,9 +1,9 @@
-#include <unistd.h>
 #include "push_swap.h"
+#include <unistd.h>
 
-void ft_putstr(char *s)
+void	ft_putstr(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -13,10 +13,10 @@ void ft_putstr(char *s)
 	}
 }
 
-void ft_lstswap(t_list **lst)
+void	ft_lstswap(t_list **lst)
 {
-	t_list *first;
-	t_list *second;
+	t_list	*first;
+	t_list	*second;
 
 	if (!lst || !*lst || !(*lst)->next)
 		return ;
@@ -27,7 +27,7 @@ void ft_lstswap(t_list **lst)
 	*lst = second;
 }
 
-int sa(t_list **a_st)
+int	sa(t_list **a_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -36,7 +36,7 @@ int sa(t_list **a_st)
 	return (1);
 }
 
-int sb(t_list **b_st)
+int	sb(t_list **b_st)
 {
 	if (!b_st || !*b_st || !(*b_st)->next)
 		return (0);
@@ -45,7 +45,7 @@ int sb(t_list **b_st)
 	return (1);
 }
 
-int ss(t_list **a_st, t_list **b_st)
+int	ss(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);

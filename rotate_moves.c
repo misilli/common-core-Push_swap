@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-void rotate(t_list **lst)
+void	rotate(t_list **lst)
 {
-	t_list *first;
-	t_list *last;
+	t_list	*first;
+	t_list	*last;
 
 	if (!lst || !*lst || !(*lst)->next)
 		return ;
@@ -16,7 +16,7 @@ void rotate(t_list **lst)
 	last->next = first;
 }
 
-int ra(t_list **a_st)
+int	ra(t_list **a_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);
@@ -25,7 +25,7 @@ int ra(t_list **a_st)
 	return (1);
 }
 
-int rb(t_list **b_st)
+int	rb(t_list **b_st)
 {
 	if (!b_st || !*b_st || !(*b_st)->next)
 		return (0);
@@ -34,7 +34,7 @@ int rb(t_list **b_st)
 	return (1);
 }
 
-int rr(t_list **a_st, t_list **b_st)
+int	rr(t_list **a_st, t_list **b_st)
 {
 	if (!a_st || !*a_st || !(*a_st)->next)
 		return (0);

@@ -1,11 +1,11 @@
+#include "push_swap.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "push_swap.h"
 
-void ft_index(t_list *stack)
+void	ft_index(t_list *stack)
 {
-	t_list *node1;
-	t_list *node2;
+	t_list	*node1;
+	t_list	*node2;
 
 	node1 = stack;
 	while (node1)
@@ -22,9 +22,9 @@ void ft_index(t_list *stack)
 	}
 }
 
-int ft_set_algorithm(t_main *arguments2)
+int	ft_set_algorithm(t_main *arguments2)
 {
-	int i;
+	int	i;
 
 	if (!arguments2)
 		return (0);
@@ -57,7 +57,7 @@ int ft_set_algorithm(t_main *arguments2)
 	return (1);
 }
 
-int ft_adaptive(t_main *arguments2)
+int	ft_adaptive(t_main *arguments2)
 {
 	if (!arguments2)
 		return (0);
@@ -66,7 +66,7 @@ int ft_adaptive(t_main *arguments2)
 	return (1);
 }
 
-int ft_run_algorithm(t_main *arguments2)
+int	ft_run_algorithm(t_main *arguments2)
 {
 	if (!arguments2)
 		return (0);
@@ -82,7 +82,7 @@ int ft_run_algorithm(t_main *arguments2)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	***arguments;
 	t_main	*data;
