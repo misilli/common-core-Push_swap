@@ -71,6 +71,6 @@ int		ft_set_algorithm(t_main *arguments2);
 int		ft_adaptive(t_main *arguments2);
 int		ft_run_algorithm(t_main *arguments2);
 void		ft_bench(t_main *data);
-int		simple(t_list **a, t_list **b);
+int simple(t_list **a, t_list **b, t_counter *counts);
 
 #endif

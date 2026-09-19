@@ -24,11 +24,23 @@ int simple(t_list **a, t_list **b, t_counter *counts)
 	{
 		min_value = ft_get_min(*a);
 		while (*a && (*a)->content != min_value)
+		{
 			ra(a);
+			if (counts)
+				counts->ra_count++;
+		}
 		if (*a)
+		{
 			pb(a, b);
+			if (counts)
+				counts->pb_count++;
+		}
 	}
 	while (*b)
+	{
 		pa(a, b);
+		if (counts)
+			counts->pa_count++;
+	}
 	return (1);
 }

@@ -96,12 +96,23 @@ static void	print_strategy(t_main *data)
 	ft_putstr_fd("\n", 2);
 }
 
+static int	ft_total_ops(t_main *data)
+{
+	if (!data || !data->counts)
+		return (0);
+	return (data->counts->sa_count + data->counts->sb_count
+		+ data->counts->ss_count + data->counts->pa_count
+		+ data->counts->pb_count + data->counts->ra_count
+		+ data->counts->rb_count + data->counts->rr_count
+		+ data->counts->rra_count + data->counts->rrb_count
+		+ data->counts->rrr_count);
+}
+
 void	ft_bench(t_main *data)
 {
 	ft_print_disorder(data);
 	print_strategy(data);
 	ft_putstr_fd("[bench] total_ops:  ", 2);
-	ft_putnbr_fd(total, 2);//counter
+	ft_putnbr_fd(ft_total_ops(data), 2);
 	ft_putstr_fd("\n", 2);
-    ft_print_counts(data);
 }

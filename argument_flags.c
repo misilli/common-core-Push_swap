@@ -18,26 +18,45 @@ static int is_valid_flag(char *flag)
 	return (0);
 }
 
-static int init_main_state(t_main **state)
+static int init_main_state(t_main **data)
 {
-	(*state) = (t_main *)malloc(sizeof(t_main));
-	if (!(*state))
+	(*data) = (t_main *)malloc(sizeof(t_main));
+	if (!(*data))
 		return (0);
-	(*state)->a = NULL;
-	(*state)->b = NULL;
-	(*state)->flags = (char **)malloc(sizeof(char *) * 2);
-	if (!(*state)->flags)
+	(*data)->a = NULL;
+	(*data)->b = NULL;
+	(*data)->flags = (char **)malloc(sizeof(char *) * 2);
+	if (!(*data)->flags)
 	{
-		free(*state);
-		*state = NULL;
+		free(*data);
+		*data = NULL;
 		return (0);
 	}
-	(*state)->flags[0] = NULL;
-	(*state)->flags[1] = NULL;
-	(*state)->bench = NULL;
-	(*state)->algorithm = NULL;
-	(*state)->fcount = 0;
-	(*state)->disorder = 0.0;
+	(*data)->flags[0] = NULL;
+	(*data)->flags[1] = NULL;
+	(*data)->bench = NULL;
+	(*data)->algorithm = NULL;
+	(*data)->fcount = 0;
+	(*data)->disorder = 0.0;
+	(*data)->counts = (t_counter *)malloc(sizeof(t_counter));
+	if (!(*data)->counts)
+	{
+		free((*data)->flags);
+		free(*data);
+		*data = NULL;
+		return (0);
+	}
+	(*data)->counts->sa_count = 0;
+	(*data)->counts->sb_count = 0;
+	(*data)->counts->ss_count = 0;
+	(*data)->counts->pa_count = 0;
+	(*data)->counts->pb_count = 0;
+	(*data)->counts->ra_count = 0;
+	(*data)->counts->rb_count = 0;
+	(*data)->counts->rr_count = 0;
+	(*data)->counts->rra_count = 0;
+	(*data)->counts->rrb_count = 0;
+	(*data)->counts->rrr_count = 0;
 	return (1);
 }
 
