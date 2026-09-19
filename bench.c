@@ -6,7 +6,7 @@
 /*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 03:13:56 by mumidill          #+#    #+#             */
-/*   Updated: 2026/09/19 17:15:03 by mumidill         ###   ########.fr       */
+/*   Updated: 2026/09/19 19:01:15 by mumidill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,34 @@ static int	ft_total_ops(t_main *data)
 		+ data->counts->rrr_count);
 }
 
+static void	print_counts(t_counter *counts)
+{
+    ft_putstr_fd("[bench] ", 2);
+    ft_putstr_fd("sa:  ", 2);
+    ft_putnbr_fd(counts->sa_count, 2);
+    ft_putstr_fd("  sb:  ", 2);
+    ft_putnbr_fd(counts->sb_count, 2);
+    ft_putstr_fd("  ss:  ", 2);
+    ft_putnbr_fd(counts->ss_count, 2);
+    ft_putstr_fd("  pa:  ", 2);
+    ft_putnbr_fd(counts->pa_count, 2);
+    ft_putstr_fd("  pb:  ", 2);
+    ft_putnbr_fd(counts->pb_count, 2);
+    ft_putstr_fd("\n[bench] ra:  ", 2);
+    ft_putnbr_fd(counts->ra_count, 2);
+    ft_putstr_fd("  rb:  ", 2);
+    ft_putnbr_fd(counts->rb_count, 2);
+    ft_putstr_fd("  rr:  ", 2);
+    ft_putnbr_fd(counts->rr_count, 2);
+    ft_putstr_fd("  rra:  ", 2);
+    ft_putnbr_fd(counts->rra_count, 2);
+    ft_putstr_fd("  rrb:  ", 2);
+    ft_putnbr_fd(counts->rrb_count, 2);
+    ft_putstr_fd("  rrr:  ", 2);
+    ft_putnbr_fd(counts->rrr_count, 2);
+    ft_putstr_fd("\n", 2);
+}
+
 void	ft_bench(t_main *data)
 {
 	ft_print_disorder(data);
@@ -115,4 +143,5 @@ void	ft_bench(t_main *data)
 	ft_putstr_fd("[bench] total_ops:  ", 2);
 	ft_putnbr_fd(ft_total_ops(data), 2);
 	ft_putstr_fd("\n", 2);
+    print_counts(data->counts);
 }
