@@ -110,7 +110,14 @@ static int	append_number(char *token, t_main *state)
 		return (0);
 	value = ft_atoi(token);
 	new_node = ft_lstnew(value);
-	return (ft_lstadd_back(&state->a, new_node));
+	if (!new_node)
+		return (0);
+	if (!ft_lstadd_back(&state->a, new_node))
+	{
+		free(new_node);
+		return (0);
+	}
+	return (1);
 }
 
 static int	handle_flag_token(char *token, t_main *state)
