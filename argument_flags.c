@@ -132,7 +132,7 @@ static int	handle_flag_token(char *token, t_main *state)
 	return (1);
 }
 
-int	flagkontrol(char ***temp, t_main **arguments2)
+int	flag_control(char ***temp, t_main **arguments2)
 {
 	int	i;
 	int	j;
@@ -144,6 +144,8 @@ int	flagkontrol(char ***temp, t_main **arguments2)
 	i = 1;
 	while (temp[i])
 	{
+		if (!temp[i][0])
+			return (0);
 		j = 0;
 		while (temp[i][j])
 		{
@@ -161,7 +163,7 @@ int	flagkontrol(char ***temp, t_main **arguments2)
 	return (arguments2 && (*arguments2)->a != NULL);
 }
 
-char	***flagbulucu(char **argv)
+char	***flag_finder(char **argv)
 {
 	char	***temp;
 	int		i;
@@ -176,12 +178,14 @@ char	***flagbulucu(char **argv)
 	i = 0;
 	while (i < argc)
 	{
-		temp[i] = (char **)malloc(sizeof(char *) * 2);
+		temp[i] = ft_split(argv[i], ' ');
 		if (!temp[i])
+		{
+			free_args(temp);
 			return (NULL);
-		temp[i][0] = argv[i];
-		temp[i][1] = NULL;
+		}
 		i++;
+		temp[i] = NULL;
 	}
 	temp[argc] = NULL;
 	return (temp);
