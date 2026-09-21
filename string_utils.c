@@ -41,3 +41,44 @@ double	compute_disorder(t_list *a)
 		return (0.0);
 	return (mistakes / total_pairs);
 }
+
+int	ft_has_duplicates(t_list *a)
+{
+	t_list	*i;
+	t_list	*j;
+
+	i = a;
+	while (i)
+	{
+		j = i->next;
+		while (j)
+		{
+			if (i->content == j->content)
+				return (1);
+			j = j->next;
+		}
+		i = i->next;
+	}
+	return (0);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*ptr;
+	size_t			total;
+	size_t			i;
+
+	if (count != 0 && size > (size_t)-1 / count)
+		return (NULL);
+	total = count * size;
+	ptr = malloc(total);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < total)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
+}

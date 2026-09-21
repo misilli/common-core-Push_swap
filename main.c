@@ -87,14 +87,13 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	arguments = flagbulucu(argv);
-	if (!arguments || !flagkontrol(arguments, &data))
+	arguments = flag_finder(argv);
+	if (!arguments || !flag_control(arguments, &data))
 	{
 		ft_error();
 		return (1);
 	}
 	data->disorder = compute_disorder(data->a);
-	printf("Disorder: %.2f\n", data->disorder);
 	ft_index(data->a);
 	ft_run_algorithm(data);
 	if (data->bench && ft_strcmp(data->bench, "--bench") == 0)

@@ -34,7 +34,7 @@ static char	**ft_splitfill(char **final, char const *s, char c)
 		if (s[i] != c && (i == 0 || s[i - 1] == c))
 		{
 			k = ft_wordlen(s + i, c);
-			final[j] = (char *)malloc(sizeof(char) * (k + 1));
+			final[j] = (char *)ft_calloc(k + 1, sizeof(char));
 			if (!final[j])
 				return (free_memory(final, j - 1));
 			ft_strlcpy(final[j], s + i, k + 1);
@@ -64,7 +64,7 @@ char	**ft_split(char const *s, char c)
 			word++;
 		i++;
 	}
-	final = (char **)malloc(sizeof(char *) * (word + 1));
+	final = (char **)ft_calloc(word + 1, sizeof(char *));
 	if (!final)
 		return (NULL);
 	return (ft_splitfill(final, s, c));

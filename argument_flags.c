@@ -143,9 +143,9 @@ int	flag_control(char ***temp, t_main **arguments2)
 	int	i;
 	int	j;
 
-	if (!temp || !arguments2)
+	if (!temp || !data)
 		return (0);
-	if (!init_main_state(arguments2))
+	if (!init_main_state(data))
 		return (0);
 	i = 1;
 	while (temp[i])
@@ -157,16 +157,16 @@ int	flag_control(char ***temp, t_main **arguments2)
 		{
 			if (temp[i][j][0] == '-' && temp[i][j][1] == '-')
 			{
-				if (!handle_flag_token(temp[i][j], *arguments2))
+				if (!handle_flag_token(temp[i][j], *data))
 					return (0);
 			}
-			else if (!append_number(temp[i][j], *arguments2))
+			else if (!is_valid_number_token(temp[i][j], *data))
 				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (arguments2 && (*arguments2)->a != NULL);
+	return (data && (*data)->a != NULL && !ft_has_duplicates((*data)->a));
 }
 
 char	***flag_finder(char **argv)
@@ -178,7 +178,7 @@ char	***flag_finder(char **argv)
 	argc = 0;
 	while (argv[argc])
 		argc++;
-	temp = (char ***)malloc(sizeof(char **) * (argc + 1));
+	temp = (char ***)ft_calloc(argc + 1, sizeof(char **));
 	if (!temp)
 		return (NULL);
 	i = 0;
@@ -193,6 +193,5 @@ char	***flag_finder(char **argv)
 		i++;
 		temp[i] = NULL;
 	}
-	temp[argc] = NULL;
 	return (temp);
 }

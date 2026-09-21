@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/21 09:04:51 by azdursun          #+#    #+#             */
+/*   Updated: 2026/09/21 09:50:36 by azdursun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
 # include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_list
 {

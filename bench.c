@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 03:13:56 by mumidill          #+#    #+#             */
 /*   Updated: 2026/09/19 23:04:40 by mumidill         ###   ########.fr       */
@@ -17,7 +17,7 @@ static void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-static void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ static void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-static void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	c;
 
@@ -52,7 +52,7 @@ static void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
-static char	*strategy_name(char *algorithm)
+char	*strategy_name(char *algorithm)
 {
 	if (ft_strcmp(algorithm, "--simple") == 0)
 		return ("Simple");
@@ -63,7 +63,7 @@ static char	*strategy_name(char *algorithm)
 	return ("Adaptive");
 }
 
-static char	*strategy_class(char *algorithm)
+char	*strategy_class(char *algorithm)
 {
 	if (ft_strcmp(algorithm, "--simple") == 0)
 		return ("O(n²)");
@@ -76,7 +76,7 @@ static void	ft_print_disorder(t_main *data)
 {
 	int	percent;
 
-	percent = (int)(data->disorder * 100.0);
+	percent = (int)(data->disorder * 10000.0 + 0.5);
 	ft_putstr_fd("[bench] disorder:  ", 2);
 	ft_putnbr_fd(percent / 100, 2);
 	ft_putstr_fd(".", 2);
@@ -137,6 +137,13 @@ static void	print_counts(t_counter *counts)
 
 void	ft_bench(t_main *data)
 {
+	t_counter	*c;
+	int			total;
+
+	c = data->counts;
+	total = c->sa_count + c->sb_count + c->ss_count + c->pa_count
+		+ c->pb_count + c->ra_count + c->rb_count + c->rr_count
+		+ c->rra_count + c->rrb_count + c->rrr_count;
 	ft_print_disorder(data);
 	print_strategy(data);
 	ft_putstr_fd("[bench] total_ops:  ", 2);
