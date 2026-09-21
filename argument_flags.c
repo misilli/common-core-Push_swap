@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 static int	is_valid_flag(char *flag)
 {
@@ -72,32 +71,32 @@ static int	init_main_state(t_main **data)
 	return (1);
 }
 
+//-0 da geçerli bir tam sayı:):)
 static int	is_valid_number_token(char *token)
 {
-	int	i;
-	int	sign;
-	int	value;
+	long	value;
+	int		sign;
+	int		i;
 
-	if (!token || token[0] == '\0')
+	if (!token)
 		return (0);
-	sign = 1;
 	i = 0;
-	if (token[0] == '+' || token[0] == '-')
-	{
-		if (!token[1])
-			return (0);
-		sign = sign * (44 - token[i++]);
-	}
+	sign = 1;
+	if (token[i] == '-')
+		sign = -1;
+	if (token[i] == '+' || token[i] == '-')
+		i++;
+	if (!token[i])
+		return (0);
+	value = 0;
 	while (token[i])
 	{
-		if (!ft_isdigit((unsigned char)token[i]))
+		if (!ft_isdigit(token[i]))
 			return (0);
-		i++;
+		value = value * 10 + (token[i++] - '0');
+		if (value * sign > 2147483647 || value * sign < -2147483648L)
+			return (0);
 	}
-	value = ft_atoi(token);
-	if ((value == 0 && sign == -1) || (sign == -1 && value > 0) || (sign == 1
-			&& value < 0))
-		return (0);
 	return (1);
 }
 
@@ -110,7 +109,14 @@ static int	append_number(char *token, t_main *state)
 		return (0);
 	value = ft_atoi(token);
 	new_node = ft_lstnew(value);
-	return (ft_lstadd_back(&state->a, new_node));
+	if (!new_node)
+		return (0);
+	if (!ft_lstadd_back(&state->a, new_node))
+	{
+		free(new_node);
+		return (0);
+	}
+	return (1);
 }
 
 static int	handle_flag_token(char *token, t_main *state)
@@ -132,7 +138,7 @@ static int	handle_flag_token(char *token, t_main *state)
 	return (1);
 }
 
-int	flagkontrol(char ***temp, t_main **arguments2)
+int	flag_control(char ***temp, t_main **arguments2)
 {
 	int	i;
 	int	j;
@@ -144,6 +150,8 @@ int	flagkontrol(char ***temp, t_main **arguments2)
 	i = 1;
 	while (temp[i])
 	{
+		if (!temp[i][0])
+			return (0);
 		j = 0;
 		while (temp[i][j])
 		{
@@ -161,7 +169,7 @@ int	flagkontrol(char ***temp, t_main **arguments2)
 	return (arguments2 && (*arguments2)->a != NULL);
 }
 
-char	***flagbulucu(char **argv)
+char	***flag_finder(char **argv)
 {
 	char	***temp;
 	int		i;
@@ -176,12 +184,14 @@ char	***flagbulucu(char **argv)
 	i = 0;
 	while (i < argc)
 	{
-		temp[i] = (char **)malloc(sizeof(char *) * 2);
+		temp[i] = ft_split(argv[i], ' ');
 		if (!temp[i])
+		{
+			free_args(temp);
 			return (NULL);
-		temp[i][0] = argv[i];
-		temp[i][1] = NULL;
+		}
 		i++;
+		temp[i] = NULL;
 	}
 	temp[argc] = NULL;
 	return (temp);

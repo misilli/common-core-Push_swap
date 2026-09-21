@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include <stdlib.h>
 
 static char	**free_memory(char **final, int index)
 {

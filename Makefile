@@ -1,6 +1,7 @@
 NAME		= push_swap
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
 
 SRCS		= main.c \
 			  error.c \
@@ -17,7 +18,7 @@ SRCS		= main.c \
 
 OBJS		= $(SRCS:.c=.o)
 
-all: $(NAME) clean
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
@@ -26,10 +27,10 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all 
 
