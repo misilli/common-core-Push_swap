@@ -6,7 +6,7 @@
 /*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 10:56:18 by azdursun          #+#    #+#             */
-/*   Updated: 2026/09/21 10:57:09 by azdursun         ###   ########.fr       */
+/*   Updated: 2026/09/21 16:04:58 by azdursun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	pb(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-unsigned int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (lst)

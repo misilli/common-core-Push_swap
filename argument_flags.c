@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_flags.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 18:43:15 by mumidill          #+#    #+#             */
-/*   Updated: 2026/09/19 23:08:04 by mumidill         ###   ########.fr       */
+/*   Updated: 2026/09/21 16:04:20 by azdursun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,104 +16,37 @@ static int	is_valid_flag(char *flag)
 {
 	if (!flag)
 		return (0);
-	if (ft_strcmp(flag, "--bench") == 0)
+	if (!ft_strcmp(flag, "--bench"))
 		return (1);
-	if (ft_strcmp(flag, "--simple") == 0)
+	if (!ft_strcmp(flag, "--simple"))
 		return (1);
-	if (ft_strcmp(flag, "--adaptive") == 0)
+	if (!ft_strcmp(flag, "--adaptive"))
 		return (1);
-	if (ft_strcmp(flag, "--medium") == 0)
+	if (!ft_strcmp(flag, "--medium"))
 		return (1);
-	if (ft_strcmp(flag, "--complex") == 0)
+	if (!ft_strcmp(flag, "--complex"))
 		return (1);
 	return (0);
 }
 
-static int	init_main_state(t_main **data)
+static int	init_main_state(t_main **state)
 {
-	(*data) = (t_main *)malloc(sizeof(t_main));
-	if (!(*data))
+	(*state) = (t_main *)ft_calloc(1, sizeof(t_main));
+	if (!(*state))
 		return (0);
-	(*data)->a = NULL;
-	(*data)->b = NULL;
-	(*data)->flags = (char **)malloc(sizeof(char *) * 2);
-	if (!(*data)->flags)
+	(*state)->flags = (char **)ft_calloc(2, sizeof(char *));
+	if (!(*state)->flags)
 	{
-		free(*data);
-		*data = NULL;
+		free(*state);
+		*state = NULL;
 		return (0);
 	}
-	(*data)->flags[0] = NULL;
-	(*data)->flags[1] = NULL;
-	(*data)->bench = NULL;
-	(*data)->algorithm = NULL;
-	(*data)->fcount = 0;
-	(*data)->disorder = 0.0;
-	(*data)->counts = (t_counter *)malloc(sizeof(t_counter));
-	if (!(*data)->counts)
+	(*state)->counts = (t_counter *)ft_calloc(1, sizeof(t_counter));
+	if (!(*state)->counts)
 	{
-		free((*data)->flags);
-		free(*data);
-		*data = NULL;
-		return (0);
-	}
-	(*data)->counts->sa_count = 0;
-	(*data)->counts->sb_count = 0;
-	(*data)->counts->ss_count = 0;
-	(*data)->counts->pa_count = 0;
-	(*data)->counts->pb_count = 0;
-	(*data)->counts->ra_count = 0;
-	(*data)->counts->rb_count = 0;
-	(*data)->counts->rr_count = 0;
-	(*data)->counts->rra_count = 0;
-	(*data)->counts->rrb_count = 0;
-	(*data)->counts->rrr_count = 0;
-	return (1);
-}
-
-//-0 da geçerli bir tam sayı:):)
-static int	is_valid_number_token(char *token)
-{
-	long	value;
-	int		sign;
-	int		i;
-
-	if (!token)
-		return (0);
-	i = 0;
-	sign = 1;
-	if (token[i] == '-')
-		sign = -1;
-	if (token[i] == '+' || token[i] == '-')
-		i++;
-	if (!token[i])
-		return (0);
-	value = 0;
-	while (token[i])
-	{
-		if (!ft_isdigit(token[i]))
-			return (0);
-		value = value * 10 + (token[i++] - '0');
-		if (value * sign > 2147483647 || value * sign < -2147483648L)
-			return (0);
-	}
-	return (1);
-}
-
-static int	append_number(char *token, t_main *state)
-{
-	int		value;
-	t_list	*new_node;
-
-	if (!is_valid_number_token(token))
-		return (0);
-	value = ft_atoi(token);
-	new_node = ft_lstnew(value);
-	if (!new_node)
-		return (0);
-	if (!ft_lstadd_back(&state->a, new_node))
-	{
-		free(new_node);
+		free((*state)->flags);
+		free(*state);
+		*state = NULL;
 		return (0);
 	}
 	return (1);
@@ -123,7 +56,7 @@ static int	handle_flag_token(char *token, t_main *state)
 {
 	if (!is_valid_flag(token))
 		return (0);
-	if (ft_strcmp(token, "--bench") == 0)
+	if (!ft_strcmp(token, "--bench"))
 	{
 		if (state->bench)
 			return (0);
@@ -138,7 +71,7 @@ static int	handle_flag_token(char *token, t_main *state)
 	return (1);
 }
 
-int	flag_control(char ***temp, t_main **arguments2)
+int	flag_control(char ***temp, t_main **data)
 {
 	int	i;
 	int	j;
@@ -150,8 +83,6 @@ int	flag_control(char ***temp, t_main **arguments2)
 	i = 1;
 	while (temp[i])
 	{
-		if (!temp[i][0])
-			return (0);
 		j = 0;
 		while (temp[i][j])
 		{
@@ -185,13 +116,12 @@ char	***flag_finder(char **argv)
 	while (i < argc)
 	{
 		temp[i] = ft_split(argv[i], ' ');
-		if (!temp[i])
+		if (!temp[i] || !temp[i][0])
 		{
 			free_args(temp);
 			return (NULL);
 		}
 		i++;
-		temp[i] = NULL;
 	}
 	return (temp);
 }

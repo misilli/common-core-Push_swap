@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azdursun <azdursun@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 01:30:00 by azdursun          #+#    #+#             */
-/*   Updated: 2026/09/20 01:30:00 by azdursun         ###   ########.fr       */
+/*   Updated: 2026/09/21 16:04:37 by azdursun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	free_stack(t_list **stack)
 {
