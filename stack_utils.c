@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/21 10:52:24 by azdursun          #+#    #+#             */
-/*   Updated: 2026/09/21 10:52:51 by azdursun         ###   ########.fr       */
+/*   Created: 2026/09/21 14:50:23 by azdursun          #+#    #+#             */
+/*   Updated: 2026/09/21 14:50:23 by azdursun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_error(void)
+int	ft_is_sorted(t_list *stack)
 {
-	write(2, "Error\n", 6);
+	while (stack && stack->next)
+	{
+		if (stack->content > stack->next->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }

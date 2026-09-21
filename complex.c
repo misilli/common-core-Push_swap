@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-static int	is_sorted(t_list *stack)
-{
-	while (stack && stack->next)
-	{
-		if (stack->content > stack->next->content)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
 static int	ft_get_maxindex(t_list *stack)
 {
 	int	maxindex;
@@ -76,7 +65,7 @@ int	ft_complex(t_list **a, t_list **b, t_counter *counts)
 
 	bit = 0;
 	bits = count_bits(ft_get_maxindex(*a));
-	while (bit < bits && !is_sorted(*a))
+	while (bit < bits && !ft_is_sorted(*a))
 	{
 		radix_pass(a, b, bit, counts);
 		bit++;

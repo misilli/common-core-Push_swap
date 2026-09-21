@@ -23,11 +23,17 @@ char	*strategy_name(char *algorithm)
 	return ("Adaptive");
 }
 
-char	*strategy_class(char *algorithm)
+char	*strategy_class(char *algorithm, double disorder)
 {
 	if (!ft_strcmp(algorithm, "--simple"))
 		return ("O(n²)");
 	if (!ft_strcmp(algorithm, "--medium"))
+		return ("O(n√n)");
+	if (!ft_strcmp(algorithm, "--complex"))
+		return ("O(n log n)");
+	if (disorder < 0.2)
+		return ("O(n²)");
+	if (disorder < 0.5)
 		return ("O(n√n)");
 	return ("O(n log n)");
 }

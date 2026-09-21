@@ -17,7 +17,10 @@ SRCS		= main.c \
 			  bench.c \
 			  put_utils.c \
 			  strategy_utils.c \
-			  complex.c
+			  complex.c \
+			  free_utils.c \
+			  medium.c \
+			  stack_utils.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -35,6 +38,6 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all 
+re: fclean all
 
 .PHONY: all clean fclean re
