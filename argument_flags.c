@@ -1,18 +1,18 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
-/*                                                            :::      :::::::*/
-/*   argument_flags.c                                       :+:      :+:    :+*/
-/*                                                        +:+ +:+         +:+ */
-/*   By: azdursun <azdursun@student.42istanbul.com.tr>  +#+  +:+       +#+    */
-/*                                                    +#+#+#+#+#+   +#+       */
-/*   Created: 2026/09/19 18:43:15 by mumidill               #+#    #+#        */
-/*   Updated: 2026/09/21 08:23:28 by azdursun              ###   ########.fr  */
+/*                                                        :::      ::::::::   */
+/*   argument_flags.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/19 18:43:15 by mumidill          #+#    #+#             */
+/*   Updated: 2026/09/21 10:41:29 by azdursun         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int is_valid_flag(char *flag)
+static int	is_valid_flag(char *flag)
 {
 	if (!flag)
 		return (0);
@@ -29,7 +29,7 @@ static int is_valid_flag(char *flag)
 	return (0);
 }
 
-static int init_main_state(t_main **state)
+static int	init_main_state(t_main **state)
 {
 	(*state) = (t_main *)ft_calloc(1, sizeof(t_main));
 	if (!(*state))
@@ -52,33 +52,7 @@ static int init_main_state(t_main **state)
 	return (1);
 }
 
-static int	is_valid_number_token(char *token, t_main *state)
-{
-	int i;
-	int value;
-	t_list *new_node;
-
-	if (!token || token[0] == '\0')
-		return (0);
-	i = 0;
-	if (token[0] == '+' || token[0] == '-')
-	{
-		if (!token[1] || !ft_isdigit((unsigned char)token[1]))
-			return (0);
-		i = 1;
-	}
-	while (token[i])
-	{
-		if (!ft_isdigit((unsigned char)token[i]))
-			return (0);
-		i++;
-	}
-	value = ft_atoi(token);
-	new_node = ft_lstnew(value);
-	return (ft_lstadd_back(&state->a, new_node));
-}
-
-static int handle_flag_token(char *token, t_main *state)
+static int	handle_flag_token(char *token, t_main *state)
 {
 	if (!is_valid_flag(token))
 		return (0);
@@ -97,14 +71,14 @@ static int handle_flag_token(char *token, t_main *state)
 	return (1);
 }
 
-int flag_control(char ***temp, t_main **arguments2)
+int	flag_control(char ***temp, t_main **data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
-	if (!temp || !arguments2)
+	if (!temp || !data)
 		return (0);
-	if (!init_main_state(arguments2))
+	if (!init_main_state(data))
 		return (0);
 	i = 1;
 	while (temp[i])
@@ -114,23 +88,23 @@ int flag_control(char ***temp, t_main **arguments2)
 		{
 			if (temp[i][j][0] == '-' && temp[i][j][1] == '-')
 			{
-				if (!handle_flag_token(temp[i][j], *arguments2))
+				if (!handle_flag_token(temp[i][j], *data))
 					return (0);
 			}
-			else if (!is_valid_number_token(temp[i][j], *arguments2))
+			else if (!is_valid_number_token(temp[i][j], *data))
 				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (arguments2 && (*arguments2)->a != NULL);
+	return (data && (*data)->a != NULL);
 }
 
-char ***flag_finder(char **argv)
+char	***flag_finder(char **argv)
 {
-	char ***temp;
-	int i;
-	int argc;
+	char	***temp;
+	int		i;
+	int		argc;
 
 	argc = 0;
 	while (argv[argc])

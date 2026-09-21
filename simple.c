@@ -1,20 +1,20 @@
-/* ************************************************************************************** */
-/*                                                                                        */
-/*                                                                   :::      ::::::::    */
-/*   simple.c                                                      :+:      :+:    :+:    */
-/*                                                               +:+ +:+         +:+      */
-/*   By: azdursun <azdursun@student.42istanbul.com.tr>         +#+  +:+       +#+         */
-/*                                                           +#+#+#+#+#+   +#+            */
-/*   Created: 2026/09/19 17:40:04 by azdursun                     #+#    #+#              */
-/*   Updated: 2026/09/19 17:40:04 by azdursun                    ###   ########.tr        */
-/*                                                                                        */
-/* ************************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/21 10:59:13 by azdursun          #+#    #+#             */
+/*   Updated: 2026/09/21 10:59:31 by azdursun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int ft_get_min(t_list *stack)
+static int	ft_get_min(t_list *stack)
 {
-	int min;
+	int	min;
 
 	if (!stack)
 		return (0);
@@ -28,9 +28,9 @@ static int ft_get_min(t_list *stack)
 	return (min);
 }
 
-int simple(t_list **a, t_list **b, t_counter *counts)
+int	simple(t_list **a, t_list **b, t_counter *counts)
 {
-	int min_value;
+	int	min_value;
 
 	while (*a)
 	{

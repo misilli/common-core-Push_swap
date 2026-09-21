@@ -1,21 +1,21 @@
-/* ************************************************************************************** */
-/*                                                                                        */
-/*                                                                   :::      ::::::::    */
-/*   main.c                                                        :+:      :+:    :+:    */
-/*                                                               +:+ +:+         +:+      */
-/*   By: azdursun <azdursun@student.42istanbul.com.tr>         +#+  +:+       +#+         */
-/*                                                           +#+#+#+#+#+   +#+            */
-/*   Created: 2026/09/19 17:39:43 by azdursun                     #+#    #+#              */
-/*   Updated: 2026/09/19 17:39:43 by azdursun                    ###   ########.tr        */
-/*                                                                                        */
-/* ************************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/19 17:39:43 by azdursun          #+#    #+#             */
+/*   Updated: 2026/09/21 10:54:18 by azdursun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_index(t_list *stack)
+void	ft_index(t_list *stack)
 {
-	t_list *node1;
-	t_list *node2;
+	t_list	*node1;
+	t_list	*node2;
 
 	node1 = stack;
 	while (node1)
@@ -32,9 +32,9 @@ void ft_index(t_list *stack)
 	}
 }
 
-int ft_set_algorithm(t_main *arguments2)
+int	ft_set_algorithm(t_main *arguments2)
 {
-	int i;
+	int	i;
 
 	if (!arguments2)
 		return (0);
@@ -42,22 +42,10 @@ int ft_set_algorithm(t_main *arguments2)
 	i = 0;
 	while (i < arguments2->fcount)
 	{
-		if (ft_strnstr(arguments2->flags[i], "--simple", 8))
-		{
-			arguments2->algorithm = arguments2->flags[i];
-			return (1);
-		}
-		if (ft_strnstr(arguments2->flags[i], "--adaptive", 10))
-		{
-			arguments2->algorithm = arguments2->flags[i];
-			return (1);
-		}
-		if (ft_strnstr(arguments2->flags[i], "--medium", 8))
-		{
-			arguments2->algorithm = arguments2->flags[i];
-			return (1);
-		}
-		if (ft_strnstr(arguments2->flags[i], "--complex", 9))
+		if (ft_strnstr(arguments2->flags[i], "--simple", 8)
+			|| ft_strnstr(arguments2->flags[i], "--adaptive", 10)
+			|| ft_strnstr(arguments2->flags[i], "--medium", 8)
+			|| ft_strnstr(arguments2->flags[i], "--complex", 9))
 		{
 			arguments2->algorithm = arguments2->flags[i];
 			return (1);
@@ -67,7 +55,7 @@ int ft_set_algorithm(t_main *arguments2)
 	return (1);
 }
 
-int ft_adaptive(t_main *arguments2)
+int	ft_adaptive(t_main *arguments2)
 {
 	if (!arguments2)
 		return (0);
@@ -76,7 +64,7 @@ int ft_adaptive(t_main *arguments2)
 	return (1);
 }
 
-int ft_run_algorithm(t_main *arguments2)
+int	ft_run_algorithm(t_main *arguments2)
 {
 	if (!arguments2)
 		return (0);
@@ -92,7 +80,7 @@ int ft_run_algorithm(t_main *arguments2)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	***arguments;
 	t_main	*data;

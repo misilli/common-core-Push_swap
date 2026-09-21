@@ -1,22 +1,22 @@
-/* ************************************************************************************** */
-/*                                                                                        */
-/*                                                                   :::      ::::::::    */
-/*   string_utils.c                                                :+:      :+:    :+:    */
-/*                                                               +:+ +:+         +:+      */
-/*   By: azdursun <azdursun@student.42istanbul.com.tr>         +#+  +:+       +#+         */
-/*                                                           +#+#+#+#+#+   +#+            */
-/*   Created: 2026/09/19 17:40:13 by azdursun                     #+#    #+#              */
-/*   Updated: 2026/09/19 17:40:13 by azdursun                    ###   ########.tr        */
-/*                                                                                        */
-/* ************************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/21 09:49:59 by azdursun          #+#    #+#             */
+/*   Updated: 2026/09/21 11:01:22 by azdursun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-char *ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t i;
-	size_t j;
-	size_t little_len;
+	size_t	i;
+	size_t	j;
+	size_t	little_len;
 
 	if (!big || !little)
 		return (NULL);
@@ -38,17 +38,17 @@ char *ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-double compute_disorder(t_list *a)
+double	compute_disorder(t_list *a)
 {
-	double total_pairs;
-	double mistakes;
-	t_list *i;
-	t_list *j;
+	double	total_pairs;
+	double	mistakes;
+	t_list	*i;
+	t_list	*j;
 
 	total_pairs = 0.0;
 	mistakes = 0.0;
@@ -76,7 +76,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t			total;
 	size_t			i;
 
-	if (count != 0 && size > SIZE_MAX / count)
+	if (count != 0 && size > (size_t)-1 / count)
 		return (NULL);
 	total = count * size;
 	ptr = malloc(total);

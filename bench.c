@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
-/*                                                            :::      :::::::*/
-/*   bench.c                                                :+:      :+:    :+*/
-/*                                                        +:+ +:+         +:+ */
-/*   By: azdursun <azdursun@student.42istanbul.com.tr>  +#+  +:+       +#+    */
-/*                                                    +#+#+#+#+#+   +#+       */
-/*   Created: 2026/09/19 03:13:56 by mumidill               #+#    #+#        */
-/*   Updated: 2026/09/21 08:54:32 by azdursun              ###   ########.fr  */
+/*                                                        :::      ::::::::   */
+/*   bench.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/19 03:13:56 by mumidill          #+#    #+#             */
+/*   Updated: 2026/09/21 09:50:47 by azdursun         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -17,7 +17,7 @@ static void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-static void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int		i;
 
@@ -29,7 +29,7 @@ static void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-static void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	c;
 
@@ -52,7 +52,7 @@ static void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
-static char	*strategy_name(char *algorithm)
+char	*strategy_name(char *algorithm)
 {
 	if (ft_strnstr(algorithm, "--simple", 8))
 		return ("Simple");
@@ -63,7 +63,7 @@ static char	*strategy_name(char *algorithm)
 	return ("Adaptive");
 }
 
-static char	*strategy_class(char *algorithm)
+char	*strategy_class(char *algorithm)
 {
 	if (ft_strnstr(algorithm, "--simple", 8))
 		return ("O(n²)");
