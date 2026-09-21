@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -81,12 +82,12 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 
 /* utils */
 int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isdigit(int c);
 int		ft_lstsize(t_list *lst);
 void	ft_index(t_list *stack);
 double	compute_disorder(t_list *a);
+int		ft_has_duplicates(t_list *a);
 void	ft_putstr(char *s);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);

@@ -16,15 +16,15 @@ static int	is_valid_flag(char *flag)
 {
 	if (!flag)
 		return (0);
-	if (ft_strnstr(flag, "--bench", 7))
+	if (!ft_strcmp(flag, "--bench"))
 		return (1);
-	if (ft_strnstr(flag, "--simple", 8))
+	if (!ft_strcmp(flag, "--simple"))
 		return (1);
-	if (ft_strnstr(flag, "--adaptive", 10))
+	if (!ft_strcmp(flag, "--adaptive"))
 		return (1);
-	if (ft_strnstr(flag, "--medium", 8))
+	if (!ft_strcmp(flag, "--medium"))
 		return (1);
-	if (ft_strnstr(flag, "--complex", 9))
+	if (!ft_strcmp(flag, "--complex"))
 		return (1);
 	return (0);
 }
@@ -56,7 +56,7 @@ static int	handle_flag_token(char *token, t_main *state)
 {
 	if (!is_valid_flag(token))
 		return (0);
-	if (ft_strnstr(token, "--bench", 7))
+	if (!ft_strcmp(token, "--bench"))
 	{
 		if (state->bench)
 			return (0);
@@ -97,7 +97,7 @@ int	flag_control(char ***temp, t_main **data)
 		}
 		i++;
 	}
-	return (data && (*data)->a != NULL);
+	return (data && (*data)->a != NULL && !ft_has_duplicates((*data)->a));
 }
 
 char	***flag_finder(char **argv)

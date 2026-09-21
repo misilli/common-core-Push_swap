@@ -12,30 +12,14 @@
 
 #include "push_swap.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
-	size_t	j;
-	size_t	little_len;
 
-	if (!big || !little)
-		return (NULL);
-	little_len = 0;
-	while (little[little_len] != '\0')
-		little_len++;
-	if (little_len == 0)
-		return ((char *)big);
 	i = 0;
-	while (i + little_len <= len && big[i] != '\0')
-	{
-		j = 0;
-		while (j < little_len && big[i + j] == little[j])
-			j++;
-		if (j == little_len)
-			return ((char *)&big[i]);
+	while (s1[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (NULL);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 int	ft_isdigit(int c)
@@ -68,6 +52,26 @@ double	compute_disorder(t_list *a)
 	if (total_pairs == 0.0)
 		return (0.0);
 	return (mistakes / total_pairs);
+}
+
+int	ft_has_duplicates(t_list *a)
+{
+	t_list	*i;
+	t_list	*j;
+
+	i = a;
+	while (i)
+	{
+		j = i->next;
+		while (j)
+		{
+			if (i->content == j->content)
+				return (1);
+			j = j->next;
+		}
+		i = i->next;
+	}
+	return (0);
 }
 
 void	*ft_calloc(size_t count, size_t size)

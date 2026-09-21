@@ -54,20 +54,20 @@ void	ft_putnbr_fd(int n, int fd)
 
 char	*strategy_name(char *algorithm)
 {
-	if (ft_strnstr(algorithm, "--simple", 8))
+	if (!ft_strcmp(algorithm, "--simple"))
 		return ("Simple");
-	if (ft_strnstr(algorithm, "--medium", 8))
+	if (!ft_strcmp(algorithm, "--medium"))
 		return ("Medium");
-	if (ft_strnstr(algorithm, "--complex", 9))
+	if (!ft_strcmp(algorithm, "--complex"))
 		return ("Complex");
 	return ("Adaptive");
 }
 
 char	*strategy_class(char *algorithm)
 {
-	if (ft_strnstr(algorithm, "--simple", 8))
+	if (!ft_strcmp(algorithm, "--simple"))
 		return ("O(n²)");
-	if (ft_strnstr(algorithm, "--medium", 8))
+	if (!ft_strcmp(algorithm, "--medium"))
 		return ("O(n√n)");
 	return ("O(n log n)");
 }

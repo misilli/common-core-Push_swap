@@ -25,7 +25,8 @@ int	ft_atoi(const char *str)
 		++i;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		sign = (str[i] == '-') ? -1 : 1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
@@ -67,6 +68,25 @@ int	ft_lstadd_back(t_list **lst, t_list *new_node)
 	return (1);
 }
 
+static int	fits_in_int(const char *s)
+{
+	long	n;
+	int		neg;
+
+	neg = (*s == '-');
+	if (*s == '+' || *s == '-')
+		s++;
+	n = 0;
+	while (*s)
+	{
+		n = n * 10 + (*s - '0');
+		if (n > (long)INT_MAX + neg)
+			return (0);
+		s++;
+	}
+	return (1);
+}
+
 int	is_valid_number_token(char *token, t_main *state)
 {
 	int		i;
@@ -88,6 +108,8 @@ int	is_valid_number_token(char *token, t_main *state)
 			return (0);
 		i++;
 	}
+	if (!fits_in_int(token))
+		return (0);
 	value = ft_atoi(token);
 	new_node = ft_lstnew(value);
 	return (ft_lstadd_back(&state->a, new_node));
