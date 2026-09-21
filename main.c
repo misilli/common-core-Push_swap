@@ -6,7 +6,7 @@
 /*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 17:39:43 by azdursun          #+#    #+#             */
-/*   Updated: 2026/09/21 10:54:18 by azdursun         ###   ########.fr       */
+/*   Updated: 2026/09/21 16:04:46 by azdursun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,22 @@ void	ft_index(t_list *stack)
 	}
 }
 
-int	ft_set_algorithm(t_main *arguments2)
+int	ft_set_algorithm(t_main *data)
 {
 	int	i;
 
-	if (!arguments2)
+	if (!data)
 		return (0);
-	arguments2->algorithm = "--adaptive";
+	data->algorithm = "--adaptive";
 	i = 0;
-	while (i < arguments2->fcount)
+	while (i < data->fcount)
 	{
-		if (!ft_strcmp(arguments2->flags[i], "--simple")
-			|| !ft_strcmp(arguments2->flags[i], "--adaptive")
-			|| !ft_strcmp(arguments2->flags[i], "--medium")
-			|| !ft_strcmp(arguments2->flags[i], "--complex"))
+		if (!ft_strcmp(data->flags[i], "--simple")
+			|| !ft_strcmp(data->flags[i], "--adaptive")
+			|| !ft_strcmp(data->flags[i], "--medium")
+			|| !ft_strcmp(data->flags[i], "--complex"))
 		{
-			arguments2->algorithm = arguments2->flags[i];
+			data->algorithm = data->flags[i];
 			return (1);
 		}
 		i++;
@@ -55,32 +55,32 @@ int	ft_set_algorithm(t_main *arguments2)
 	return (1);
 }
 
-int	ft_adaptive(t_main *arguments2)
+int	ft_adaptive(t_main *data)
 {
-	if (!arguments2)
+	if (!data)
 		return (0);
-	if (arguments2->disorder < 0.2)
-		return (simple(&arguments2->a, &arguments2->b, arguments2->counts));
-	if (arguments2->disorder < 0.5)
-		return (ft_medium(&arguments2->a, &arguments2->b, arguments2->counts));
-	return (ft_complex(&arguments2->a, &arguments2->b, arguments2->counts));
+	if (data->disorder < 0.2)
+		return (simple(&data->a, &data->b, data->counts));
+	if (data->disorder < 0.5)
+		return (ft_medium(&data->a, &data->b, data->counts));
+	return (ft_complex(&data->a, &data->b, data->counts));
 }
 
-int	ft_run_algorithm(t_main *arguments2)
+int	ft_run_algorithm(t_main *data)
 {
-	if (!arguments2)
+	if (!data)
 		return (0);
-	ft_set_algorithm(arguments2);
-	if (ft_is_sorted(arguments2->a))
+	ft_set_algorithm(data);
+	if (ft_is_sorted(data->a))
 		return (1);
-	if (!ft_strcmp(arguments2->algorithm, "--simple"))
-		return (simple(&arguments2->a, &arguments2->b, arguments2->counts));
-	if (!ft_strcmp(arguments2->algorithm, "--medium"))
-		return (ft_medium(&arguments2->a, &arguments2->b, arguments2->counts));
-	if (!ft_strcmp(arguments2->algorithm, "--complex"))
-		return (ft_complex(&arguments2->a, &arguments2->b, arguments2->counts));
-	if (!ft_strcmp(arguments2->algorithm, "--adaptive"))
-		return (ft_adaptive(arguments2));
+	if (!ft_strcmp(data->algorithm, "--simple"))
+		return (simple(&data->a, &data->b, data->counts));
+	if (!ft_strcmp(data->algorithm, "--medium"))
+		return (ft_medium(&data->a, &data->b, data->counts));
+	if (!ft_strcmp(data->algorithm, "--complex"))
+		return (ft_complex(&data->a, &data->b, data->counts));
+	if (!ft_strcmp(data->algorithm, "--adaptive"))
+		return (ft_adaptive(data));
 	return (1);
 }
 
@@ -91,10 +91,12 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
+	data = NULL;
 	arguments = flag_finder(argv);
 	if (!arguments || !flag_control(arguments, &data))
 	{
 		ft_error();
+		free_all(arguments, data);
 		return (1);
 	}
 	data->disorder = compute_disorder(data->a);
@@ -104,5 +106,6 @@ int	main(int argc, char **argv)
 	{
 		ft_bench(data);
 	}
+	free_all(arguments, data);
 	return (0);
 }
