@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mumidill <mumidill@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 19:54:19 by mumidill          #+#    #+#             */
-/*   Updated: 2026/09/21 11:18:51 by azdursun         ###   ########.fr       */
+/*   Updated: 2026/09/21 04:45:27 by mumidill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
