@@ -74,7 +74,7 @@ int	ft_run_algorithm(t_main *arguments2)
 	if (!ft_strcmp(arguments2->algorithm, "--medium"))
 		return (1);
 	if (!ft_strcmp(arguments2->algorithm, "--complex"))
-		return (1);
+		return (ft_complex(&arguments2->a, &arguments2->b, arguments2->counts));
 	if (!ft_strcmp(arguments2->algorithm, "--adaptive"))
 		return (ft_adaptive(arguments2));
 	return (1);

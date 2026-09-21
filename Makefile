@@ -14,7 +14,10 @@ SRCS		= main.c \
 			  push_moves.c \
 			  rotate_moves.c \
 			  reverse_moves.c \
-			  bench.c
+			  bench.c \
+			  put_utils.c \
+			  strategy_utils.c \
+			  complex.c
 
 OBJS		= $(SRCS:.c=.o)
 

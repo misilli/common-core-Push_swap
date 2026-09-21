@@ -102,6 +102,7 @@ void	free_all(char ***args, t_main *data);
 int		ft_set_algorithm(t_main *data);
 int		ft_run_algorithm(t_main *data);
 int		simple(t_list **a, t_list **b, t_counter *counts);
+int		ft_complex(t_list **a, t_list **b, t_counter *counts);
 void	ft_bench(t_main *data);
 char	*strategy_name(char *algorithm);
 char	*strategy_class(char *strategy);
