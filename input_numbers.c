@@ -56,6 +56,13 @@ int	ft_lstadd_back(t_list **lst, t_list *new_node)
 
 	if (!lst || !new_node)
 		return (0);
+	tmp = *lst;
+	while (tmp)
+	{
+		if (tmp->content == new_node->content)
+			return (0);
+		tmp = tmp->next;
+	}
 	if (*lst == NULL)
 	{
 		*lst = new_node;

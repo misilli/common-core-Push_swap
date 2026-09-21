@@ -6,7 +6,7 @@
 /*   By: azdursun <azdursun@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 03:13:56 by mumidill          #+#    #+#             */
-/*   Updated: 2026/09/21 09:50:47 by azdursun         ###   ########.fr       */
+/*   Updated: 2026/09/19 23:04:40 by mumidill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_putchar_fd(char c, int fd)
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (s && s[i] != '\0')
@@ -54,20 +54,20 @@ void	ft_putnbr_fd(int n, int fd)
 
 char	*strategy_name(char *algorithm)
 {
-	if (!ft_strcmp(algorithm, "--simple"))
+	if (ft_strcmp(algorithm, "--simple") == 0)
 		return ("Simple");
-	if (!ft_strcmp(algorithm, "--medium"))
+	if (ft_strcmp(algorithm, "--medium") == 0)
 		return ("Medium");
-	if (!ft_strcmp(algorithm, "--complex"))
+	if (ft_strcmp(algorithm, "--complex") == 0)
 		return ("Complex");
 	return ("Adaptive");
 }
 
 char	*strategy_class(char *algorithm)
 {
-	if (!ft_strcmp(algorithm, "--simple"))
+	if (ft_strcmp(algorithm, "--simple") == 0)
 		return ("O(n²)");
-	if (!ft_strcmp(algorithm, "--medium"))
+	if (ft_strcmp(algorithm, "--medium") == 0)
 		return ("O(n√n)");
 	return ("O(n log n)");
 }
@@ -95,32 +95,44 @@ static void	print_strategy(t_main *data)
 	ft_putstr_fd("\n", 2);
 }
 
-static void	print_count(char *name, int value, char *end)
+static int	ft_total_ops(t_main *data)
 {
-	ft_putstr_fd(name, 2);
-	ft_putstr_fd(":  ", 2);
-	ft_putnbr_fd(value, 2);
-	ft_putstr_fd(end, 2);
+	if (!data || !data->counts)
+		return (0);
+	return (data->counts->sa_count + data->counts->sb_count
+		+ data->counts->ss_count + data->counts->pa_count
+		+ data->counts->pb_count + data->counts->ra_count
+		+ data->counts->rb_count + data->counts->rr_count
+		+ data->counts->rra_count + data->counts->rrb_count
+		+ data->counts->rrr_count);
 }
 
-static void	ft_print_counts(t_main *data)
+static void	print_counts(t_counter *counts)
 {
-	t_counter	*c;
-
-	c = data->counts;
 	ft_putstr_fd("[bench] ", 2);
-	print_count("sa", c->sa_count, "  ");
-	print_count("sb", c->sb_count, "  ");
-	print_count("ss", c->ss_count, "  ");
-	print_count("pa", c->pa_count, "  ");
-	print_count("pb", c->pb_count, "\n");
-	ft_putstr_fd("[bench] ", 2);
-	print_count("ra", c->ra_count, "  ");
-	print_count("rb", c->rb_count, "  ");
-	print_count("rr", c->rr_count, "  ");
-	print_count("rra", c->rra_count, "  ");
-	print_count("rrb", c->rrb_count, "  ");
-	print_count("rrr", c->rrr_count, "\n");
+	ft_putstr_fd("sa:  ", 2);
+	ft_putnbr_fd(counts->sa_count, 2);
+	ft_putstr_fd("  sb:  ", 2);
+	ft_putnbr_fd(counts->sb_count, 2);
+	ft_putstr_fd("  ss:  ", 2);
+	ft_putnbr_fd(counts->ss_count, 2);
+	ft_putstr_fd("  pa:  ", 2);
+	ft_putnbr_fd(counts->pa_count, 2);
+	ft_putstr_fd("  pb:  ", 2);
+	ft_putnbr_fd(counts->pb_count, 2);
+	ft_putstr_fd("\n[bench] ra:  ", 2);
+	ft_putnbr_fd(counts->ra_count, 2);
+	ft_putstr_fd("  rb:  ", 2);
+	ft_putnbr_fd(counts->rb_count, 2);
+	ft_putstr_fd("  rr:  ", 2);
+	ft_putnbr_fd(counts->rr_count, 2);
+	ft_putstr_fd("  rra:  ", 2);
+	ft_putnbr_fd(counts->rra_count, 2);
+	ft_putstr_fd("  rrb:  ", 2);
+	ft_putnbr_fd(counts->rrb_count, 2);
+	ft_putstr_fd("  rrr:  ", 2);
+	ft_putnbr_fd(counts->rrr_count, 2);
+	ft_putstr_fd("\n", 2);
 }
 
 void	ft_bench(t_main *data)
@@ -135,7 +147,7 @@ void	ft_bench(t_main *data)
 	ft_print_disorder(data);
 	print_strategy(data);
 	ft_putstr_fd("[bench] total_ops:  ", 2);
-	ft_putnbr_fd(total, 2);
+	ft_putnbr_fd(ft_total_ops(data), 2);
 	ft_putstr_fd("\n", 2);
-	ft_print_counts(data);
+	print_counts(data->counts);
 }

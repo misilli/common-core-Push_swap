@@ -40,9 +40,9 @@ int	pb(t_list **a_st, t_list **b_st)
 	return (1);
 }
 
-int	ft_lstsize(t_list *lst)
+unsigned int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (lst)
