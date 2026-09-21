@@ -10,8 +10,6 @@
 /*                                                                                        */
 /* ************************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "push_swap.h"
 
 void ft_index(t_list *stack)
@@ -74,7 +72,7 @@ int ft_adaptive(t_main *arguments2)
 	if (!arguments2)
 		return (0);
 	if (arguments2->disorder < 0.2)
-		return (simple(&arguments2->a, &arguments2->b));
+		return (simple(&arguments2->a, &arguments2->b, arguments2->counts));
 	return (1);
 }
 
@@ -84,7 +82,7 @@ int ft_run_algorithm(t_main *arguments2)
 		return (0);
 	ft_set_algorithm(arguments2);
 	if (ft_strnstr(arguments2->algorithm, "--simple", 8))
-		return (simple(&arguments2->a, &arguments2->b));
+		return (simple(&arguments2->a, &arguments2->b, arguments2->counts));
 	if (ft_strnstr(arguments2->algorithm, "--medium", 8))
 		return (1);
 	if (ft_strnstr(arguments2->algorithm, "--complex", 9))
@@ -101,14 +99,13 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	arguments = flagbulucu(argv);
-	if (!arguments || !flagkontrol(arguments, &data))
+	arguments = flag_finder(argv);
+	if (!arguments || !flag_control(arguments, &data))
 	{
 		ft_error();
 		return (1);
 	}
 	data->disorder = compute_disorder(data->a);
-	printf("Disorder: %.2f\n", data->disorder);
 	ft_index(data->a);
 	ft_run_algorithm(data);
 	if (data->bench && ft_strnstr(data->bench, "--bench", 7))

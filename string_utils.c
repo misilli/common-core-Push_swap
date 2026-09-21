@@ -10,7 +10,6 @@
 /*                                                                                        */
 /* ************************************************************************************** */
 
-#include <stddef.h>
 #include "push_swap.h"
 
 char *ft_strnstr(const char *big, const char *little, size_t len)
@@ -69,4 +68,25 @@ double compute_disorder(t_list *a)
 	if (total_pairs == 0.0)
 		return (0.0);
 	return (mistakes / total_pairs);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*ptr;
+	size_t			total;
+	size_t			i;
+
+	if (count != 0 && size > SIZE_MAX / count)
+		return (NULL);
+	total = count * size;
+	ptr = malloc(total);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < total)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }

@@ -36,11 +36,11 @@ int simple(t_list **a, t_list **b, t_counter *counts)
 	{
 		min_value = ft_get_min(*a);
 		while (*a && (*a)->content != min_value)
-			ra(a);
+			counts->ra_count += ra(a);
 		if (*a)
-			pb(a, b);
+			counts->pb_count += pb(a, b);
 	}
 	while (*b)
-		pa(a, b);
+		counts->pa_count += pa(a, b);
 	return (1);
 }

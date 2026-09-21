@@ -1,4 +1,15 @@
-#include <stdlib.h>
+/******************************************************************************/
+/*                                                                            */
+/*                                                            :::      :::::::*/
+/*   argument_flags.c                                       :+:      :+:    :+*/
+/*                                                        +:+ +:+         +:+ */
+/*   By: azdursun <azdursun@student.42istanbul.com.tr>  +#+  +:+       +#+    */
+/*                                                    +#+#+#+#+#+   +#+       */
+/*   Created: 2026/09/19 18:43:15 by mumidill               #+#    #+#        */
+/*   Updated: 2026/09/21 08:23:28 by azdursun              ###   ########.fr  */
+/*                                                                            */
+/******************************************************************************/
+
 #include "push_swap.h"
 
 static int is_valid_flag(char *flag)
@@ -20,28 +31,28 @@ static int is_valid_flag(char *flag)
 
 static int init_main_state(t_main **state)
 {
-	(*state) = (t_main *)malloc(sizeof(t_main));
+	(*state) = (t_main *)ft_calloc(1, sizeof(t_main));
 	if (!(*state))
 		return (0);
-	(*state)->a = NULL;
-	(*state)->b = NULL;
-	(*state)->flags = (char **)malloc(sizeof(char *) * 2);
+	(*state)->flags = (char **)ft_calloc(2, sizeof(char *));
 	if (!(*state)->flags)
 	{
 		free(*state);
 		*state = NULL;
 		return (0);
 	}
-	(*state)->flags[0] = NULL;
-	(*state)->flags[1] = NULL;
-	(*state)->bench = NULL;
-	(*state)->algorithm = NULL;
-	(*state)->fcount = 0;
-	(*state)->disorder = 0.0;
+	(*state)->counts = (t_counter *)ft_calloc(1, sizeof(t_counter));
+	if (!(*state)->counts)
+	{
+		free((*state)->flags);
+		free(*state);
+		*state = NULL;
+		return (0);
+	}
 	return (1);
 }
 
-static int append_number(char *token, t_main *state)
+static int	is_valid_number_token(char *token, t_main *state)
 {
 	int i;
 	int value;
@@ -86,7 +97,7 @@ static int handle_flag_token(char *token, t_main *state)
 	return (1);
 }
 
-int flagkontrol(char ***temp, t_main **arguments2)
+int flag_control(char ***temp, t_main **arguments2)
 {
 	int i;
 	int j;
@@ -106,7 +117,7 @@ int flagkontrol(char ***temp, t_main **arguments2)
 				if (!handle_flag_token(temp[i][j], *arguments2))
 					return (0);
 			}
-			else if (!append_number(temp[i][j], *arguments2))
+			else if (!is_valid_number_token(temp[i][j], *arguments2))
 				return (0);
 			j++;
 		}
@@ -115,7 +126,7 @@ int flagkontrol(char ***temp, t_main **arguments2)
 	return (arguments2 && (*arguments2)->a != NULL);
 }
 
-char ***flagbulucu(char **argv)
+char ***flag_finder(char **argv)
 {
 	char ***temp;
 	int i;
@@ -124,19 +135,22 @@ char ***flagbulucu(char **argv)
 	argc = 0;
 	while (argv[argc])
 		argc++;
-	temp = (char ***)malloc(sizeof(char **) * (argc + 1));
+	temp = (char ***)ft_calloc(argc + 1, sizeof(char **));
 	if (!temp)
 		return (NULL);
 	i = 0;
 	while (i < argc)
 	{
-		temp[i] = (char **)malloc(sizeof(char *) * 2);
+		temp[i] = (char **)ft_calloc(2, sizeof(char *));
 		if (!temp[i])
+		{
+			while (i--)
+				free(temp[i]);
+			free(temp);
 			return (NULL);
+		}
 		temp[i][0] = argv[i];
-		temp[i][1] = NULL;
 		i++;
 	}
-	temp[argc] = NULL;
 	return (temp);
 }
